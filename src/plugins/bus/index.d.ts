@@ -1,1 +1,4 @@
-declare function install(): void
+declare function install (): void
+export {
+  install
+}

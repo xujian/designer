@@ -17,6 +17,8 @@ const Bus = new Vue({
   }
 })
 
-export default function install () {
-  Vue.prototype.$bus = Bus
+export default {
+  install () {
+    Vue.prototype.$bus = Bus
+  }
 }

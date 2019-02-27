@@ -11,7 +11,7 @@ import Quasar from 'quasar'
 
 import Bus from './plugins/bus'
 import '@/css/app.styl'
-import helper from './mixins/helper'
+import mixins from './mixins'
 
 const plugins = require.context('./plugins', true, /index.js$/)
 plugins.keys().forEach(p => {
@@ -19,7 +19,7 @@ plugins.keys().forEach(p => {
 })
 
 Vue.use(Bus)
-Vue.mixin(helper)
+Vue.use(mixins)
 
 Vue.config.productionTip = false
 
