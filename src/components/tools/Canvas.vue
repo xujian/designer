@@ -26,12 +26,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
-import PaControl from '@/components/tools/Control'
-import ControlProp from '@/classes/ControlProp'
-import ChartProp from '@/classes/ChartProp'
+import PaControl from '@/components/tools/Control.vue'
+import ControlProp, { ControlPropData } from '@/classes/ControlProp'
+import ChartProp, { ChartPropData } from '@/classes/ChartProp'
 
 export default {
   name: 'PaCanvas',
@@ -52,21 +52,21 @@ export default {
     }
   },
   methods: {
-    onDrag (cargo) {
+    onDrag (cargo: any) {
 
     },
-    onResize (cargo) {
+    onResize (cargo: any) {
 
     },
-    onActivated (cargo) {
+    onActivated (cargo: any) {
       // 组件选中时
       this.inspect(cargo)
     },
-    onDeactivated (cargo) {
+    onDeactivated (cargo: any) {
       this.aside(false)
     },
-    inspect (cargo) {
-      let props = [
+    inspect (cargo: any) {
+      let props: ControlPropData[] = [
         {
           name: 'position',
           label: '位置',
@@ -86,25 +86,29 @@ export default {
           value: cargo.componnet
         }
       ]
-
       this.aside('inspector', {
-          props: props.map(x => ControlProp.create(x))
-        }
-      )
+        // 打开右侧栏 
+        controlProps: props.map(x =>
+          ControlProp.create(x)),
+        chartProps: []
+      })
     },
     initEvents () {
       this.$bus.on('canvas', this.processCanvasCommands)
     },
-    processCanvasCommands (payload) {
+    processCanvasCommands (payload: {
+      command: string,
+      data: any
+    }) {
       if (payload.command === 'changeSize') {
-        this.changeSize(payload.data)
+        this.changeCanvasSize(payload.data)
       }
     },
     changeCanvasSize (size) {
     }
   },
   mounted () {
-    this.initEvents()
+    (this as any).initEvents()
   },
   components: {
     VueDraggableResizable,

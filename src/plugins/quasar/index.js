@@ -1,8 +1,8 @@
-import './styles/quasar.styl'
+import Quasar from 'quasar'
 import 'quasar-extras/animate'
 import 'quasar-extras/material-icons'
 import 'quasar-extras/fontawesome'
-import Quasar from 'quasar'
+import './styles/quasar.styl'
 import config from './config'
 
 const install = (Vue, options) => {

@@ -26,4 +26,13 @@ export default class ChartProp {
   get name () {
     return this.data.name
   }
+  get label () {
+    return this.data.label
+  }
+  get type () {
+    return this.data.type
+  }
+  get value () {
+    return this.data.value
+  }
 }
