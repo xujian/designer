@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import PaScreenSize from './ScreenSize.vue'
-import PaChartPalette from './ChartPalette.vue'
-import PaMiscPalette from './MiscPalette.vue'
+import PaScreenSize from './ScreenSize'
+import PaChartPalette from './ChartPalette'
+import PaMiscPalette from './MiscPalette'
 
 export default {
   nameL: 'PaCommandBar',

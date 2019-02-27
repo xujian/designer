@@ -1,9 +1,11 @@
 <template v-if="value.type === Number">
   <div class="prop-item">
-    <q-input float-label="value.label" v-model="value.value"></q-input>
+    <q-input 
+      float-label="value.label" 
+      v-model="value.value"></q-input>
   </div>
 </template>
-<template v-if="value.type === 'number-array'">
+<template v-if="value.type === `number-array`">
   <div class="prop-item">
     <q-input ></q-input>
   </div>
@@ -24,7 +26,7 @@ export default {
   name: 'PropItem',
   props: {
     value: {
-      type: CharacterData,
+      type: `CharacterData`,
       default: null
     }
   }

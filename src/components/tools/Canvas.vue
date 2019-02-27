@@ -30,7 +30,8 @@
 import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control'
-import ControlProp from '@/classes/ControlProp.ts'
+import ControlProp from '@/classes/ControlProp'
+import ChartProp from '@/classes/ChartProp'
 
 export default {
   name: 'PaCanvas',

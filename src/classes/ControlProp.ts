@@ -18,12 +18,25 @@ export interface ControlPropData {
   value: PropDimension | PropPosition
 }
 
-export default class ChartProp {
+export default class ControlProp {
   data: ControlPropData
   constructor(input: ControlPropData) {
     this.data = input
   }
   get name() {
     return this.data.name
+  }
+  static create (input: any): ControlProp {
+    let value: PropDimension = {
+      width: 480,
+      height: 200
+    }
+    let data: ControlPropData = {
+      name: 'dimension',
+      label: '尺寸',
+      type: 'prop-dimension',
+      value: value
+    }
+    return new ControlProp (data)
   }
 }

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 const Bus = new Vue({
   methods: {
     emit (event, ...args) {

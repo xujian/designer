@@ -5,5 +5,3 @@ declare module '*.vue' {
 
 declare module 'quasar'
 declare module 'quasar-framework/*'
-
-declare module 'bus'
