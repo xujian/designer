@@ -1,0 +1,18 @@
+.icon-chart-bar:before {
+  content: url('./icons/charts/bar.svg')
+}
+.icon-chart-line:before {
+  content: url('./icons/charts/line.svg')
+}
+.icon-chart-pie:before {
+  content: url('./icons/charts/pie.svg')
+}
+.icon-chart-bar-horizon:before {
+  content: url('./icons/charts/bar-horizon.svg')
+}
+.icon-misc-tabs:before {
+  content: url('./icons/misc/tabs.svg');
+}
+.icon-misc-table:before {
+  content: url('./icons/misc/table.svg');
+}

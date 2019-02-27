@@ -9,9 +9,13 @@ import 'quasar-extras/material-icons'
 import 'quasar-extras/fontawesome'
 import Quasar from 'quasar'
 
+import Bus from './plugins/bus'
+
 Vue.use(Quasar, {
   config: {}
 })
+
+Vue.use(Bus)
 
 Vue.config.productionTip = false
 

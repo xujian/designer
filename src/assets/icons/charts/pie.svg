@@ -1,0 +1,7 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<path style="fill:#FFBC00;" d="M256,0c141.384,0,256,114.616,256,256S397.384,512,256,512S0,397.384,0,256S114.616,0,256,0z"/>
+<path style="fill:#B7441C;" d="M512,256c0,141.384-114.615,256-256,256V0C397.385,0,512,114.615,512,256z"/>
+<path style="fill:#FF6029;" d="M256,256l0.906,1.569l0.906-1.569l220.377,127.235C434.036,460.174,351.071,512,256,512
+	c-94.747,0-177.466-51.476-221.733-127.982L256,256z"/>
+</svg>

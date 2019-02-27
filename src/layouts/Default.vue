@@ -1,90 +1,101 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-layout-header>
-      <q-toolbar
-        color="primary"
-        :glossy="$q.theme === 'mat'"
-        :inverted="$q.theme === 'ios'"
-      >
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-          icon="menu"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-          <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-layout-header>
-
+  <q-layout class="layout" view="lhr lpr lfr">
+    <pa-header></pa-header>
     <q-layout-drawer
+      side="left"
+      :width="240"
+      overlay
       v-model="leftDrawerOpen"
-      :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
-    >
-      <q-list
-        no-border
-        link
-        inset-delimiter
-      >
-        <q-list no-border link inset-delimiter>
-          <q-list-header>Navigation</q-list-header>
-          <q-item to="/" exact>
-            <q-item-side icon="home" />
-            <q-item-main label="Home" />
-          </q-item>
-          <q-item to="/about">
-            <q-item-side icon="info_outline" />
-            <q-item-main label="About" />
-          </q-item>
-
-          <q-item-separator />
-          <q-list-header>Essential Links</q-list-header>
-          <q-item @click.native="openURL('http://quasar-framework.org')">
-            <q-item-side icon="school" />
-            <q-item-main label="Docs" sublabel="quasar-framework.org"></q-item-main>
-          </q-item>
-          <q-item @click.native="openURL('https://discord.gg/5TDhbDg')">
-            <q-item-side icon="chat" />
-            <q-item-main label="Discord Chat Channel" sublabel="https://discord.gg/5TDhbDg"></q-item-main>
-          </q-item>
-          <q-item @click.native="openURL('http://forum.quasar-framework.org')">
-            <q-item-side icon="forum" />
-            <q-item-main label="Forum" sublabel="forum.quasar-framework.org"></q-item-main>
-          </q-item>
-          <q-item @click.native="openURL('https://twitter.com/quasarframework')">
-            <q-item-side icon="rss feed" />
-            <q-item-main label="Twitter" sublabel="@quasarframework"></q-item-main>
-          </q-item>
-        </q-list>
-      </q-list>
+      :content-class="'nav'">
+      <pa-nav></pa-nav>
     </q-layout-drawer>
-
+    <q-layout-drawer
+      side="right"
+      :width="320"
+      overlay
+      v-model="rightDrawerOpen"
+      :content-class="'aside'">
+      <pa-aside
+        :component="asideComponent"
+        :data="asideData"
+      ></pa-aside>
+    </q-layout-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>
+    <q-layout-footer></q-layout-footer>
   </q-layout>
 </template>
 
 <script>
 import { openURL } from 'quasar'
+import PaHeader from '@/components/ui/Header'
+import PaNav from '@/components/ui/Nav'
+import PaAside from '@/components/ui/Aside'
 
 export default {
   name: 'LayoutDefault',
   data () {
     return {
-      leftDrawerOpen: false //this.$q.platform.is.desktop
+      leftDrawerOpen: false,
+      rightDrawerOpen: false,
+      asideComponent: '',
+      asideData: null
     }
+  },
+  mounted () {
+    /**
+     * 打开左侧栏
+     */
+    this.$bus.on('menu', () => {
+      this.leftDrawerOpen = true
+    })
+    /**
+     * 切换左侧栏
+     */
+    this.$bus.on('menuToggled', () => {
+      this.leftDrawerOpen = !this.leftDrawerOpen
+    })
+    /**
+     * 切换右侧栏
+     */
+    this.$bus.on('asideToggled', () => {
+      this.rightDrawerOpen = !this.rightDrawerOpen
+    })
+    /**
+     * 打开右侧栏
+     */
+    this.$bus.on('aside', payload => {
+      if (payload === false) {
+        this.asideComponent = null
+        this.rightDrawerOpen = false
+        return
+      }
+      this.asideComponent = payload.component
+      this.asideData = payload.data
+      this.rightDrawerOpen = true
+      console.log('deault layout aside data', payload)
+    })
   },
   methods: {
     openURL
+  },
+  components: {
+    PaHeader,
+    PaNav,
+    PaAside
   }
 }
 </script>
 
-<style>
+<style lang="stylus">
+.layout
+  .nav // 左侧栏
+    background-color #00796B
+    color #fff
+  .aside // 右侧栏
+    background-color #444
+    color #fff
+.aside
+  background-color #333
 </style>
