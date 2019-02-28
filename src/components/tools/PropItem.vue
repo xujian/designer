@@ -1,13 +1,8 @@
-<template v-if="value.type === Number">
+<template v-if="value.value.type === PropValueTypes.numberPair">
   <div class="prop-item">
-    <q-input 
+    <q-input
       float-label="value.label"
       v-model="value.value"></q-input>
-  </div>
-</template>
-<template v-if="value.type === `number-array`">
-  <div class="prop-item">
-    <q-input ></q-input>
   </div>
 </template>
 <template v-else>
@@ -17,23 +12,21 @@
   </div>
 </template>
 
-<script>
-import ChartProp, { ChartPropData } from '@/classes/ChartProp'
-import ControlProp from '@/classes/ControlProp'
-/**
- * 显示在属性面板里的属性项
- * 依据属性type显示控件
- */
-export default {
-  name: 'PropItem',
-  props: {
-    value: {
-      type: ChartPropData,
-      default: null
-    }
-  },
+<script lang="ts">
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
+import ChartProp, { ChartPropData } from '@/models/ChartProp'
+import ControlProp, { ControlPropData, PropValueTypes } from '@/models/ControlProp'
+
+@Component
+export default class PropItem extends Vue {
+
+  @Prop({ default: null })
+  value!: ChartPropData
+
   mounted () {
-    console.log('PropItem.vue vaue', this.value.type.constructor)
+    console.log('PropItem.vue vaue',
+      this.value.type.constructor)
   }
 }
 </script>

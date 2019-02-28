@@ -5,7 +5,8 @@
         v-for="(item, index) in value"
         :key="index">
         <q-item-main>
-          <pa-prop-item v-model="value[index].data"></pa-prop-item>
+          <pa-prop-item
+            v-model="value[index].data"></pa-prop-item>
         </q-item-main>
       </q-item>
     </q-list>
@@ -16,8 +17,8 @@
   </div>
 </template>
 
-<script>
-import PaPropItem from '@/components/tools/PropItem'
+<script lang="ts">
+import PaPropItem from '@/components/tools/PropItem.vue'
 
 export default {
   name: 'PaProps',
@@ -27,7 +28,9 @@ export default {
     }
   },
   mounted () {
-    console.log('PaOptions---', this.value)
+    for (let v of this.value) {
+      console.log('PaOptions---', v)
+    }
   },
   components: {
     PaPropItem

@@ -1,4 +1,4 @@
-declare function install(): void
+import Vue from 'vue'
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -7,8 +7,4 @@ declare module 'vue/types/vue' {
      */
     aside: (component: string | boolean, payload?: any) => void
   }
-}
-
-export {
-  install
 }

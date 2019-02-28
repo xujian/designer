@@ -5,114 +5,103 @@
     height: canvasSize[1] * zoom + 'px'
   }">
     <vue-draggable-resizable
-      v-for="(car, i) in cargos"
+      v-for="(control, i) in controls"
       :key="i"
-      :x="car.position[0]"
-      :y="car.position[1]"
-      :w="car.dimension[0]"
-      :h="car.dimension[1]"
+      :x="control.position.value[0]"
+      :y="control.position.value[1]"
+      :w="control.dimension.value[0]"
+      :h="control.dimension.value[1]"
       :handles="['bm', 'br', 'mr']"
-      @dragging="onDrag(car)"
-      @resizing="onResize(car)"
-      @activated="onActivated(car)"
-      @deactivated="onDeactivated(car)"
+      @dragging="onDrag(control)"
+      @resizing="onResize(control)"
+      @activated="onActivated(control)"
+      @deactivated="onDeactivated(control)"
       class-name="drag"
       :grid=[10,10]
       :parent="true">
         <pa-control
-          :component="car.component"
+          :component="control.chart"
           ></pa-control>
       </vue-draggable-resizable>
   </div>
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
 import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
-import ControlProp, { ControlPropData } from '@/classes/ControlProp'
-import ChartProp, { ChartPropData } from '@/classes/ChartProp'
+import Control, { ControlTypes } from '@/models/Control'
+import ControlProp, { ControlPropData } from '@/models/ControlProp'
+import ChartProp, { ChartPropData } from '@/models/ChartProp'
 
-export default {
-  name: 'PaCanvas',
-  data () {
-    return {
-      canvasSize: [1920, 540],
-      zoom: 1,
-      cargos: [ // 画布上的控件
-        {
-          name: 'Cargo',
-          type: 'chart',
-          props: {},
-          position: [10, 10, 100],
-          dimension: [320, 160],
-          component: null
-        }
-      ]
-    }
-  },
-  methods: {
-    onDrag (cargo: any) {
 
-    },
-    onResize (cargo: any) {
-
-    },
-    onActivated (cargo: any) {
-      // 组件选中时
-      this.inspect(cargo)
-    },
-    onDeactivated (cargo: any) {
-      this.aside(false)
-    },
-    inspect (cargo: any) {
-      let props: ControlPropData[] = [
-        {
-          name: 'position',
-          label: '位置',
-          type: Number,
-          value: cargo.position
-        },
-        {
-          name: 'dimension',
-          label: '尺寸',
-          type: Number,
-          value: cargo.dimension
-        },
-        {
-          name: 'componnet',
-          label: '组件',
-          type: Number,
-          value: cargo.componnet
-        }
-      ]
-      this.aside('inspector', {
-        // 打开右侧栏 
-        controlProps: props.map(x =>
-          ControlProp.create(x)),
-        chartProps: []
-      })
-    },
-    initEvents () {
-      this.$bus.on('canvas', this.processCanvasCommands)
-    },
-    processCanvasCommands (payload: {
-      command: string,
-      data: any
-    }) {
-      if (payload.command === 'changeSize') {
-        this.changeCanvasSize(payload.data)
-      }
-    },
-    changeCanvasSize (size) {
-    }
-  },
-  mounted () {
-    (this as any).initEvents()
-  },
+@Component({
   components: {
     VueDraggableResizable,
     PaControl
+  }
+})
+export default class Cavas extends Vue {
+  canvasSize: number[] = [1920, 540]
+  zoom: number = 1
+  controls: Control[] = []
+
+  onDrag (control: Control) {
+  }
+
+  onResize (control: Control) {
+  }
+  
+  onActivated (control: Control) {
+    // 组件选中时
+    this.inspect(control)
+  }
+
+  onDeactivated (control: Control) {
+    this.aside(false)
+  }
+
+  addEmptyControl () {
+    this.controls.push(Control.create({
+      name: 'Cargo',
+      type: ControlTypes.empty,
+      props: {},
+      position: [10, 10, 100],
+      dimension: [320, 160],
+    }))
+  }
+
+  inspect (control: Control) {
+    this.aside('inspector', {
+      // 打开右侧栏 
+      controlProps: control.props,
+      chartProps: []
+    })
+  }
+
+  initEvents () {
+    this.$bus.on('canvas', this.processCanvasCommands)
+  }
+
+  processCanvasCommands (payload: {
+    command: string,
+    data: any
+  }) {
+    if (payload.command === 'changeSize') {
+      this.changeCanvasSize(payload.data)
+    }
+  }
+
+  changeCanvasSize (size: {
+    width: number,
+    height: number
+  }) {
+  }
+  mounted () {
+    this.initEvents()
+    this.addEmptyControl()
   }
 }
 </script>

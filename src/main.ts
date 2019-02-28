@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
-import '@/css/app.styl'
 import mixins from './mixins'
 
 const plugins = require.context('./plugins', true, /index.js$/)

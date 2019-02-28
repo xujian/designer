@@ -5,7 +5,7 @@
     </header>
     <main>
       <pa-props
-        v-model="value.props">
+        v-model="value.controlProps">
       </pa-props>
     </main>
   </div>
@@ -37,9 +37,12 @@ export default {
 
 <style lang="stylus">
 .inspector
-  h1
-    font-size 14px
-    padding 0 12px
+  header
+    height 24px
+    h1
+      line-height 24px
+      font-size 14px
+      padding 0 12px
   main
     .q-list
       border none
