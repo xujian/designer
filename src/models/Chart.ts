@@ -1,12 +1,15 @@
-import ChartProp from './ChartProp'
+import Prop from './Prop'
 
-export default class Control {
+/**
+ * 图表
+ */
+export default class Chart {
   /**
    * 控件属性
    */
-  props: ChartProp[]
+  props: Prop[]
 
-  constructor(props: ChartProp[]) {
+  constructor(props: Prop[]) {
     this.props = props
   }
 }

@@ -1,11 +1,22 @@
-import ControlProp, { PropValueTypes, PropDimension } from './ControlProp';
+import Prop, { PropTypes } from './Prop';
 import Chart from './Chart'
-import { PropPosition } from './ChartProp';
 
+/**
+ * 不同行为和内容的控件
+ */
 export enum ControlTypes {
-  chart,
-  utils,
-  empty
+  /**
+   * 图表控件
+   */
+  CHART,
+  /**
+   * 通用控件
+   */
+  PLAIN,
+  /**
+   * 没有内容的控件
+   */
+  EMPTY
 }
 
 /**
@@ -21,9 +32,11 @@ export default class Control {
   /**
    * 控件类型
    */
-  type: ControlTypes = ControlTypes.empty
-  position: ControlProp = ControlProp.create('position', [10, 10], PropValueTypes.numberPair)
-  dimension: ControlProp = ControlProp.create('dimension', [480, 200], PropValueTypes.numberPair)
+  type: ControlTypes = ControlTypes.EMPTY
+  position: Prop = 
+    Prop.create('position', [10, 10], PropTypes.NUMBER_ARRAY)
+  dimension: Prop = 
+    Prop.create('dimension', [480, 200], PropTypes.NUMBER_ARRAY)
 
   constructor () {
   }
@@ -35,15 +48,15 @@ export default class Control {
   static create (input: any): Control {
     let control = new Control()
     control.name = input.name || ''
-    control.type = ControlTypes.empty
-    control.position = ControlProp.create('dimention',
+    control.type = ControlTypes.EMPTY
+    control.position = Prop.create('dimention',
       input.position)
-    control.dimension = ControlProp.create('position',
+    control.dimension = Prop.create('position',
       input.dimension)
     return control
   }
 
-  get props(): ControlProp[] {
+  get props(): Prop[] {
     return [
       this.position,
       this.dimension

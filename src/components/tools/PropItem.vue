@@ -1,4 +1,4 @@
-<template v-if="value.value.type === PropValueTypes.numberPair">
+<template v-if="value.value.type === PropTypes.numberPair">
   <div class="prop-item">
     <q-input
       float-label="value.label"
@@ -14,15 +14,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-import ChartProp, { ChartPropData } from '@/models/ChartProp'
-import ControlProp, { ControlPropData, PropValueTypes } from '@/models/ControlProp'
+import { Component, Prop as PropDecorator } from 'vue-property-decorator'
+import Prop, { PropTypes } from '@/models/Prop'
 
 @Component
 export default class PropItem extends Vue {
-
-  @Prop({ default: null })
-  value!: ChartPropData
+  @PropDecorator({ default: null })
+  value!: Prop
 
   mounted () {
     console.log('PropItem.vue vaue',

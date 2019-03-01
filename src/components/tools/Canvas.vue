@@ -28,14 +28,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
 import Control, { ControlTypes } from '@/models/Control'
-import ControlProp, { ControlPropData } from '@/models/ControlProp'
-import ChartProp, { ChartPropData } from '@/models/ChartProp'
-
+import Prop from '@/models/Prop'
 
 @Component({
   components: {
@@ -53,7 +51,7 @@ export default class Cavas extends Vue {
 
   onResize (control: Control) {
   }
-  
+
   onActivated (control: Control) {
     // 组件选中时
     this.inspect(control)
@@ -66,16 +64,16 @@ export default class Cavas extends Vue {
   addEmptyControl () {
     this.controls.push(Control.create({
       name: 'Cargo',
-      type: ControlTypes.empty,
+      type: ControlTypes.EMPTY,
       props: {},
       position: [10, 10, 100],
-      dimension: [320, 160],
+      dimension: [320, 160]
     }))
   }
 
   inspect (control: Control) {
     this.aside('inspector', {
-      // 打开右侧栏 
+      // 打开右侧栏
       controlProps: control.props,
       chartProps: []
     })

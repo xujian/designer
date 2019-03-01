@@ -1,4 +1,4 @@
-const PropTypes = Object.freeze({
+const PropDefs = Object.freeze({
   POSITION: {
     name: 'position',
     type: 'number-pair',
@@ -11,4 +11,4 @@ const PropTypes = Object.freeze({
   }
 })
 
-export default PropTypes
+export default PropDefs
