@@ -27,8 +27,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
@@ -41,7 +40,7 @@ import Prop from '@/models/Prop'
     PaControl
   }
 })
-export default class Cavas extends Vue {
+export default class Canvas extends Vue {
   canvasSize: number[] = [1920, 540]
   zoom: number = 1
   controls: Control[] = []

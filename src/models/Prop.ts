@@ -4,8 +4,10 @@ import PropDefs from './PropDefs'
  * 不同类型的属性
  */
 export enum PropTypes {
-  NUMBER_ARRAY,
-  NONE
+  STRING = 'String',
+  NUMBER = 'Number',
+  NUMBER_ARRAY = 'Number Array',
+  NONE = 'None'
 }
 
 export interface PropDimension {
@@ -44,7 +46,7 @@ export default class Prop<T = string | number> {
    * 只读
    */
   readonly: boolean = false
-  value: any
+  value: T = null
   /**
    * 值数据类型
    */
@@ -55,13 +57,21 @@ export default class Prop<T = string | number> {
 
   static create(
     name: string,
-    value: any,
+    value?: any,
     type?: PropTypes
   ): Prop {
     let prop = new Prop()
     prop.name = name
-    prop.value = value
+    prop.value = value || null
     prop.type = type || PropTypes.NONE
     return prop
+  }
+
+  static from<T> (input: T): Prop {
+    let result: Prop = new Prop()
+    result.name = ''
+    result.type = PropTypes.NONE
+    result.value = input
+    return result
   }
 }

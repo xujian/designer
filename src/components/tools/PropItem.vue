@@ -23,8 +23,8 @@ export default class PropItem extends Vue {
   value!: Prop
 
   mounted () {
-    console.log('PropItem.vue vaue',
-      this.value.type.constructor)
+    console.log('PropItem.vue value',
+      this.value)
   }
 }
 </script>

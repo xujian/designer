@@ -6,7 +6,7 @@
         :key="index">
         <q-item-main>
           <pa-prop-item
-            v-model="value[index].data"></pa-prop-item>
+            v-model="value[index]"></pa-prop-item>
         </q-item-main>
       </q-item>
     </q-list>
