@@ -33,7 +33,7 @@ export interface PropValue<T> {
 /**
  * Base for Prop of Control other Classes
  */
-export default class Prop<T = string | number> {
+export default class Prop<T = string | number | null> {
   /**
    * 用来区分属性名的标识符
    */
@@ -67,11 +67,17 @@ export default class Prop<T = string | number> {
     return prop
   }
 
-  static from<T> (input: T): Prop {
+  static from<T> (input: {
+    name: string,
+    label: string,
+    value: any,
+    readonly?: boolean
+  }): Prop {
     let result: Prop = new Prop()
-    result.name = ''
+    result.name = input.name
     result.type = PropTypes.NONE
-    result.value = input
+    result.value = input.value
+    result.readonly = input.readonly || false
     return result
   }
 }

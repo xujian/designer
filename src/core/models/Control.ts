@@ -1,6 +1,7 @@
 import Prop, { PropTypes } from './Prop';
 import Chart from './Chart'
 import Stencil from './Stencil'
+import Inspectable from '@/core/decorators/Inspectable'
 
 /**
  * 不同行为和内容的控件
@@ -37,13 +38,24 @@ export default class Control {
   /**
    * 控件上显示的名称
    */
-  name: string = '控件'
+  @Inspectable({
+    label: '名称'
+  })
+  name: string = 'Unamed'
   /**
    * 控件类型
    */
   type: ControlTypes = ControlTypes.EMPTY
+
+  @Inspectable({
+    label: '位置'
+  })
   position: Prop = 
     Prop.create('position', [10, 10], PropTypes.NUMBER_ARRAY)
+
+    @Inspectable({
+    label: '尺寸'
+  })
   dimension: Prop = 
     Prop.create('dimension', [480, 200], PropTypes.NUMBER_ARRAY)
 
@@ -77,26 +89,11 @@ export default class Control {
 
   /**
    * 控件的所有可配置属性
+   * returan all inspectable properties
    */
   get props(): Prop[] {
-    // 遍历 local properties 并组装成Prop[]
-    let originalProps: string[] = 
-      Object.getOwnPropertyNames(this)
-    let props: Prop[] = []
-    for (const name of originalProps) {
-      let prop: any = (this as any)[name]
-      console.log('Control.ts get props(),', prop, name);
-      if (name === '__ob__') {
-        continue
-      }
-      if (prop === undefined) {
-        continue
-      }
-      props.push(prop.constructor.name === Prop.name
-        ? prop
-        : this.makeProp(name)) // 
-    }
-    console.log('Control.ts props:', props)
+    let props = (<any>this)['__inspectable__']
+    console.log('get props()//////////', props)
     return props
   }
 }

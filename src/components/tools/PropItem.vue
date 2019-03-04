@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop as PropDecorator } from 'vue-property-decorator'
-import Prop, { PropTypes } from '@/models/Prop'
+import Prop, { PropTypes } from '@/core/models/Prop'
 
 @Component
 export default class PropItem extends Vue {

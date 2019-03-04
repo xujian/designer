@@ -31,8 +31,8 @@ import { Vue, Component } from 'vue-property-decorator'
 import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
-import Control, { ControlTypes } from '@/models/Control'
-import Prop from '@/models/Prop'
+import Control, { ControlTypes } from '@/core/models/Control'
+import Prop from '@/core/models/Prop'
 
 @Component({
   components: {
