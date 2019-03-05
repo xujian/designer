@@ -1,8 +1,10 @@
 <template>
   <div  v-if="typeIs('String')" class="prop-item">
     <q-input
-      float-label="value.label"
-      v-model="value.type"></q-input>
+      dark
+      :float-label="value.label"
+      :value="value.value"
+      @input="emitChange"></q-input>
   </div>
   <div v-else class="prop-item">
     <h6 class="info text-center">类型错误</h6>
@@ -28,6 +30,13 @@ export default class PropItem extends Vue {
   typeIs (name: string): boolean {
     console.log('typeIs()', this.value.type)
     return this.value.type === name
+  }
+
+  emitChange (val: any) {
+    console.log('q-input change()', val)
+    let newProp = this.value
+    newProp.value = val
+    this.$emit('input', newProp)
   }
 }
 </script>

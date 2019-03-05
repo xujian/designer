@@ -72,6 +72,14 @@ export default class Control {
     this.component = undefined
   }
 
+  applyProps (props: Prop[]): void {
+    props.forEach(p => {
+      if (p.name === 'title') {
+        this.title = p.value
+      }
+    })
+  }
+
   /**
    * 从输入参数构建控件
    * @param input 输入参数

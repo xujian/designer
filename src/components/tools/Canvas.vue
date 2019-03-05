@@ -1,9 +1,10 @@
 <template>
   <div class="board"
-  :style="{
-    width: canvasSize[0] * zoom + 'px',
-    height: canvasSize[1] * zoom + 'px'
-  }">
+    :style="{
+      width: canvasSize[0] * zoom + 'px',
+      height: canvasSize[1] * zoom + 'px'
+    }"
+    @click.self="onBoardClick($event)">
     <vue-draggable-resizable
       v-for="(control, i) in controls"
       :key="i"
@@ -19,6 +20,10 @@
       :grid=[10,10]
       :parent="true">
         <pa-control
+          :title="control.title"
+          :class="{
+            selected: selected === control.uuid
+          }"
           :component="control.chart"
           ></pa-control>
       </vue-draggable-resizable>
@@ -26,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
@@ -41,6 +46,10 @@ import utils from '@/core/utils'
   }
 })
 export default class Canvas extends Vue {
+  /**
+   * 当前选中control
+   */
+  selected: string = ''
   canvasSize: number[] = [1920, 540]
   zoom: number = 1
   controls: Control[] = []
@@ -53,7 +62,7 @@ export default class Canvas extends Vue {
 
   onActivated (control: Control) {
     // 组件选中时
-    this.inspect(control)
+    this.selected = control.uuid
   }
 
   addEmptyControl () {
@@ -70,6 +79,7 @@ export default class Canvas extends Vue {
   inspect (control: Control) {
     this.aside('inspector', {
       // 打开右侧栏
+      uuid: this.selected,
       controlProps: control.props,
       chartProps: []
     })
@@ -85,6 +95,30 @@ export default class Canvas extends Vue {
   }) {
     if (payload.command === 'changeSize') {
       this.changeCanvasSize(payload.data)
+    }
+    if (payload.command === 'propsUpdated') {
+      this.processProps(payload.data)
+    }
+  }
+
+  processProps (data: any) {
+    let controlToUpdate = this.controls
+      .find(c => c.uuid === data.uuid)
+    controlToUpdate && controlToUpdate.applyProps(data.props)
+  }
+
+  onBoardClick ($event: any) {
+    this.selected = ''
+  }
+
+  @Watch('selected')
+  onSelectedChanged (newVal: string, oldVal: string) {
+    if (!newVal) {
+      this.aside(false)
+    } else {
+      let selectedControl = this.controls
+        .find(c => c.uuid === newVal)
+      selectedControl && this.inspect(selectedControl)
     }
   }
 
