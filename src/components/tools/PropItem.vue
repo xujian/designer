@@ -1,14 +1,12 @@
-<template v-if="value.value.type === PropTypes.numberPair">
-  <div class="prop-item">
+<template>
+  <div  v-if="typeIs('String')" class="prop-item">
     <q-input
       float-label="value.label"
-      v-model="value.value"></q-input>
+      v-model="value.type"></q-input>
   </div>
-</template>
-<template v-else>
-  <div class="prop-item">
+  <div v-else class="prop-item">
     <h6 class="info text-center">类型错误</h6>
-    <p class="text-center">{{value.name}}</p>
+    <p class="text-center">{{value.type}}</p>
   </div>
 </template>
 
@@ -25,6 +23,11 @@ export default class PropItem extends Vue {
   mounted () {
     console.log('PropItem.vue value',
       this.value)
+  }
+
+  typeIs (name: string): boolean {
+    console.log('typeIs()', this.value.type)
+    return this.value.type === name
   }
 }
 </script>

@@ -10,30 +10,25 @@ export enum PropTypes {
   NONE = 'None'
 }
 
-export interface PropDimension {
-  type: PropTypes.NUMBER_ARRAY,
+export declare type PropValueAsDimension = {
   width: number,
   height: number
 }
 
-export interface PropPosition {
-  type: PropTypes.NUMBER_ARRAY,
+export declare type PropValyeAsPosition = {
   x: number,
   y: number,
-  z: 100
+  z?: number
 }
 
-/**
- * 控件属性
- */
-export interface PropValue<T> {
-  value: PropDimension | PropPosition
+export interface PropValue<T = string> {
+  value: T
 }
 
 /**
  * Base for Prop of Control other Classes
  */
-export default class Prop<T = string | number | null> {
+export default class Prop<T = string> {
   /**
    * 用来区分属性名的标识符
    */
@@ -46,11 +41,11 @@ export default class Prop<T = string | number | null> {
    * 只读
    */
   readonly: boolean = false
-  value: T = null
+  value: T = new String('')
   /**
    * 值数据类型
    */
-  type: PropTypes = PropTypes.NONE
+  type: PropTypes = PropTypes.STRING
 
   constructor () {
   }
@@ -70,14 +65,16 @@ export default class Prop<T = string | number | null> {
   static from<T> (input: {
     name: string,
     label: string,
-    value: any,
+    value?: any,
     readonly?: boolean
   }): Prop {
     let result: Prop = new Prop()
     result.name = input.name
-    result.type = PropTypes.NONE
+    result.label = input.label
+    result.type = PropTypes.STRING
     result.value = input.value
     result.readonly = input.readonly || false
+    console.log('Props.ts //////////', result, input)
     return result
   }
 }

@@ -62,7 +62,7 @@ export default class Canvas extends Vue {
 
   addEmptyControl () {
     this.controls.push(Control.create({
-      name: 'Cargo',
+      title: 'Cargo',
       type: ControlTypes.EMPTY,
       props: {},
       position: [10, 10, 100],
@@ -98,6 +98,7 @@ export default class Canvas extends Vue {
   }
   mounted () {
     this.initEvents()
+    this.addEmptyControl()
     this.addEmptyControl()
   }
 }
