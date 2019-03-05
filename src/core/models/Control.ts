@@ -1,9 +1,7 @@
 import Prop, { PropTypes } from './Prop';
 import Chart from './Chart'
 import Stencil from './Stencil'
-import Inspectable, {
-  INSPECTABLE_METHOD_NAME
-} from '@/core/decorators/Inspectable'
+import Inspectable from '@/core/decorators/Inspectable'
 
 /**
  * 不同行为和内容的控件
@@ -35,6 +33,8 @@ export enum ControlTypes {
  * 画布上可以拖动的控件
  */
 export default class Control {
+
+  uuid: string = ''
   /**
    * Components (chart or non-chart thing) in the control
    */
@@ -77,6 +77,7 @@ export default class Control {
    * @param input 输入参数
    */
   static create (input: {
+    uuid: string,
     title: string,
     type: ControlTypes,
     props: any,
@@ -84,6 +85,7 @@ export default class Control {
     dimension: number[]
   }): Control {
     let control = new Control()
+    control.uuid = input.uuid
     control.title = input.title || 'Untitled'
     control.type = input.type ||ControlTypes.EMPTY
     control.position = Prop.create('dimention',
@@ -99,8 +101,7 @@ export default class Control {
    */
   get props(): Prop[] {
     let __this = this as any
-    let props = __this[INSPECTABLE_METHOD_NAME]()
-    console.log('Control.ts ======', props)
+    let props = __this.getInspectableProps()
     return props
   }
 }

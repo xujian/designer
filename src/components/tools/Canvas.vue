@@ -15,7 +15,6 @@
       @dragging="onDrag(control)"
       @resizing="onResize(control)"
       @activated="onActivated(control)"
-      @deactivated="onDeactivated(control)"
       class-name="drag"
       :grid=[10,10]
       :parent="true">
@@ -33,6 +32,7 @@ import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
 import Control, { ControlTypes } from '@/core/models/Control'
 import Prop from '@/core/models/Prop'
+import utils from '@/core/utils'
 
 @Component({
   components: {
@@ -56,12 +56,9 @@ export default class Canvas extends Vue {
     this.inspect(control)
   }
 
-  onDeactivated (control: Control) {
-    this.aside(false)
-  }
-
   addEmptyControl () {
     this.controls.push(Control.create({
+      uuid: utils.uuid(),
       title: 'Cargo',
       type: ControlTypes.EMPTY,
       props: {},
