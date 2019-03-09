@@ -27,6 +27,14 @@
           :component="control.chart"
           ></pa-control>
       </vue-draggable-resizable>
+      <pa-bar-chart 
+        :bar-width="20"
+        :data="[
+          [100, 150, 500, 250, 400],
+          [47, 100, 100, 430, 210]
+        ]">
+        <pa-axis type="value"></pa-axis>
+      </pa-bar-chart>
   </div>
 </template>
 
@@ -129,8 +137,6 @@ export default class Canvas extends Vue {
   }
   mounted () {
     this.initEvents()
-    this.addEmptyControl()
-    this.addEmptyControl()
   }
 }
 </script>
