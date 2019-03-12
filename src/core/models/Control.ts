@@ -2,6 +2,7 @@ import Prop, { PropTypes } from './Prop';
 import Chart from './Chart'
 import Stencil from './Stencil'
 import Inspectable from '@/core/decorators/Inspectable'
+import { PaChart, ChartFactory } from 'vue-chartlib'
 
 /**
  * 不同行为和内容的控件
@@ -39,6 +40,11 @@ export default class Control {
    * Components (chart or non-chart thing) in the control
    */
   component: Chart | Stencil | undefined
+
+  /**
+   * 数据组数(X轴刻度数)
+   */
+  groups: number = 0
 
   /**
    * 控件上显示的名称
@@ -90,7 +96,11 @@ export default class Control {
     type: ControlTypes,
     props: any,
     position: number[],
-    dimension: number[]
+    dimension: number[],
+    component: {
+      name: string,
+      props: any
+    }
   }): Control {
     let control = new Control()
     control.uuid = input.uuid
@@ -100,6 +110,9 @@ export default class Control {
       input.position)
     control.dimension = Prop.create('position',
       input.dimension)
+    control.component = ChartFactory.make(
+      input.component.name,
+      input.component.props)
     return control
   }
 

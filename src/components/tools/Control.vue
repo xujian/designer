@@ -13,27 +13,49 @@
       </q-btn-group>
     </q-toolbar>
     <h1 class="title">{{title}}</h1>
-    <component :is="component"></component>
+    <div class="control-component" :style="{width: width + 'px', height: height + 'px'}">
+      <div ref="component"></div>
+    </div>
     <slot></slot>
   </div>
 </template>
 
-<script>
-import PaControlMenu from './ControlMenu'
-export default {
-  name: 'PaControl',
-  props: {
-    title: {
-      type: String,
-      default: ''
-    },
-    component: {
-      type: Object,
-      default: null
-    }
-  },
+<script lang="ts">
+import { VueComponent } from 'vue'
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import PaControlMenu from './ControlMenu.vue'
+
+@Component({
   components: {
     PaControlMenu
+  }
+})
+export default class PaControl extends Vue {
+
+  name: string = 'PaControl'
+
+  @Prop({default: ''})
+  title: string = ''
+
+  @Prop({default: null})
+  component: VueComponent | undefined
+
+  @Prop({default: 0})
+  width: number | undefined
+
+  @Prop({default: 0})
+  height: number | undefined
+
+  @Prop({default: null})
+  props: any
+
+  constructor () {
+    super()
+  }
+
+  mounted () {
+    /**插入component(图表) */
+    this.component.$mount(this.$refs.component)
   }
 }
 </script>
@@ -70,4 +92,7 @@ export default {
   &:hover
     .titlebar
       transform translateY(0px)
+  .control-component
+    width 100%
+    height 100%
 </style>

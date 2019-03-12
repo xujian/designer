@@ -21,20 +21,14 @@
       :parent="true">
         <pa-control
           :title="control.title"
+          :width="control.dimension.value[0] - 1"
+          :height="control.dimension.value[1] - 1"
           :class="{
             selected: selected === control.uuid
           }"
-          :component="control.chart"
+          :component="control.component"
           ></pa-control>
       </vue-draggable-resizable>
-      <pa-bar-chart 
-        :bar-width="20"
-        :data="[
-          [100, 150, 500, 250, 400],
-          [47, 100, 100, 430, 210]
-        ]">
-        <pa-axis type="value"></pa-axis>
-      </pa-bar-chart>
   </div>
 </template>
 
@@ -46,6 +40,8 @@ import PaControl from '@/components/tools/Control.vue'
 import Control, { ControlTypes } from '@/core/models/Control'
 import Prop from '@/core/models/Prop'
 import utils from '@/core/utils'
+import Chart from '@/core/models/Chart'
+import { PaChart } from 'vue-chartlib'
 
 @Component({
   components: {
@@ -73,14 +69,23 @@ export default class Canvas extends Vue {
     this.selected = control.uuid
   }
 
-  addEmptyControl () {
+  addControl () {
     this.controls.push(Control.create({
       uuid: utils.uuid(),
       title: 'Cargo',
       type: ControlTypes.EMPTY,
       props: {},
       position: [10, 10, 100],
-      dimension: [320, 160]
+      dimension: [320, 160],
+      component: {
+        name: 'PaBarChart',
+        props: {
+          data: [
+            [100, 150, 500, 250, 400],
+            [47, 100, 100, 430, 210]
+          ]
+        }
+      }
     }))
   }
 
@@ -137,6 +142,7 @@ export default class Canvas extends Vue {
   }
   mounted () {
     this.initEvents()
+    this.addControl()
   }
 }
 </script>
@@ -144,6 +150,7 @@ export default class Canvas extends Vue {
 <style lang="stylus">
 .board
   background-color #666
+  position relative
   .drag
     color #fff
 </style>
