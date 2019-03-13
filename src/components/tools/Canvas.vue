@@ -21,8 +21,8 @@
       :parent="true">
         <pa-control
           :title="control.title"
-          :width="control.dimension.value[0] - 1"
-          :height="control.dimension.value[1] - 1"
+          :width="control.dimension.value[0] - 2"
+          :height="control.dimension.value[1] - 2 -25"
           :class="{
             selected: selected === control.uuid
           }"
@@ -72,7 +72,7 @@ export default class Canvas extends Vue {
   addControl () {
     this.controls.push(Control.create({
       uuid: utils.uuid(),
-      title: 'Cargo',
+      title: 'Cargo 1',
       type: ControlTypes.EMPTY,
       props: {},
       position: [10, 10, 100],
@@ -80,10 +80,55 @@ export default class Canvas extends Vue {
       component: {
         name: 'PaBarChart',
         props: {
+          barWidth: 8,
+          round: true,
           data: [
             [100, 150, 500, 250, 400],
             [47, 100, 100, 430, 210]
           ]
+        }
+      }
+    }))
+    this.controls.push(Control.create({
+      uuid: utils.uuid(),
+      title: 'Cargo 2',
+      type: ControlTypes.EMPTY,
+      props: {},
+      position: [10, 200, 100],
+      dimension: [320, 160],
+      component: {
+        name: 'PaPieChart',
+        props: {
+          data: [[
+            {name: 'A', value: 100},
+            {name: 'B', value: 150},
+            {name: 'C', value: 500},
+            {name: 'D', value: 250},
+            {name: 'E', value: 400}
+          ]]
+        }
+      }
+    }))
+    this.controls.push(Control.create({
+      uuid: utils.uuid(),
+      title: 'Cargo 2',
+      type: ControlTypes.EMPTY,
+      props: {},
+      position: [400, 10, 100],
+      dimension: [320, 160],
+      component: {
+        name: 'PaLineChart',
+        props: {
+          lineWidth: 2,
+          smooth: true,
+          data: [
+            {name: 'A', value: [120, 132, 101, 124, 90, 230]},
+            {name: 'B', value: [80, 65, 190, 56, 14, 38]},
+            {name: 'C', value: [87, 78, 50, 83, 67, 104]},
+            {name: 'D', value: [34, 35, 23, 26, 87, 76]},
+            {name: 'E', value: [99, 49, 44, 90, 49, 50]}
+          ],
+          x: ['A', 'B', 'C', 'D', 'E', 'F']
         }
       }
     }))

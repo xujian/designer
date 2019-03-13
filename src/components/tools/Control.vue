@@ -35,7 +35,7 @@ export default class PaControl extends Vue {
   name: string = 'PaControl'
 
   @Prop({default: ''})
-  title: string = ''
+  title: string
 
   @Prop({default: null})
   component: VueComponent | undefined
