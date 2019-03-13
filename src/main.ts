@@ -11,7 +11,9 @@ plugins.keys().forEach(p => {
   Vue.use(plugins(p)) // TOTO: add options here
 })
 
-Vue.use(<any>ChartLib)
+Vue.use(<any>ChartLib, {
+  theme: 'cold'
+})
 Vue.use(<any>mixins)
 
 Vue.config.productionTip = false

@@ -3,20 +3,23 @@
     <pa-screen-size></pa-screen-size>
     <pa-chart-palette></pa-chart-palette>
     <pa-misc-palette></pa-misc-palette>
+    <pa-themes-bar></pa-themes-bar>
   </div>
 </template>
 
 <script>
-import PaScreenSize from './ScreenSize'
-import PaChartPalette from './ChartPalette'
-import PaMiscPalette from './MiscPalette'
+import PaScreenSize from './ScreenSize.vue'
+import PaChartPalette from './ChartPalette.vue'
+import PaMiscPalette from './MiscPalette.vue'
+import PaThemesBar from './Themes.vue'
 
 export default {
   nameL: 'PaCommandBar',
   components: {
     PaScreenSize,
     PaChartPalette,
-    PaMiscPalette
+    PaMiscPalette,
+    PaThemesBar
   }
 }
 </script>

@@ -56,6 +56,7 @@ export default class PaControl extends Vue {
   mounted () {
     /**插入component(图表) */
     this.component.$mount(this.$refs.component)
+    console.log('globalConfigs-----------------------', this.$chartlib.globalConfigs)
   }
 }
 </script>
