@@ -27,8 +27,23 @@
             selected: selected === control.uuid
           }"
           :component="control.component"
-          ></pa-control>
+          >
+            <pa-axis
+              :label="X"
+              :data="['A', 'B', 'C', 'D', 'E']"></pa-axis>
+          </pa-control>
       </vue-draggable-resizable>
+      <div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
+        <pa-bar-chart
+          :bar-width="2"
+          :round="true"
+          :data="[
+            [100, 150, 500, 250, 400],
+            [47, 100, 100, 430, 210]
+          ]">
+          <pa-axis :label="'X'" data="['A', 'B', 'C', 'D', 'E']"></pa-axis>
+        </pa-bar-chart>
+      </div>
   </div>
 </template>
 
@@ -142,8 +157,7 @@ export default class Canvas extends Vue {
       component: {
         name: 'PaScatterChart',
         props: {
-          lineWidth: 2,
-          smooth: true,
+          symbol: 1,
           data: [
             {name: '女性', value: [[161.2, 51.6], [167.5, 59.0], [159.5, 49.2], [157.0, 63.0], [155.8, 53.6],
               [170.0, 59.0], [159.1, 47.6], [166.0, 69.8], [176.2, 66.8], [160.2, 75.2],
@@ -309,7 +323,7 @@ export default class Canvas extends Vue {
   }
   mounted () {
     this.initEvents()
-    this.addControl()
+    // this.addControl()
   }
 }
 </script>
