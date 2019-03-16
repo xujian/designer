@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { VueComponent } from 'vue'
+import { Component as VueComponent } from 'vue'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import PaControlMenu from './ControlMenu.vue'
 
@@ -30,35 +30,34 @@ import PaControlMenu from './ControlMenu.vue'
     PaControlMenu
   }
 })
-export default class PaControl extends Vue {
-
+class PaControl extends Vue {
   name: string = 'PaControl'
 
-  @Prop({default: ''})
-  title: string
+  @Prop({ default: '' })
+  title: string | undefined
 
-  @Prop({default: null})
+  @Prop({ default: null })
   component: VueComponent | undefined
 
-  @Prop({default: 0})
+  @Prop({ default: 0 })
   width: number | undefined
 
-  @Prop({default: 0})
+  @Prop({ default: 0 })
   height: number | undefined
 
-  @Prop({default: null})
+  @Prop({ default: null })
   props: any
 
-  constructor () {
-    super()
-  }
-
   mounted () {
-    /**插入component(图表) */
-    this.component.$mount(this.$refs.component)
+    /** 插入component(图表) */
+    if (this.component) {
+      this.component.$mount(this.$refs.component)
+    }
     console.log('globalConfigs-----------------------', this.$chartlib.globalConfigs)
   }
 }
+
+export default PaControl
 </script>
 
 <style lang="stylus">
