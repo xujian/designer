@@ -32,12 +32,19 @@
       </vue-draggable-resizable>
       <div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
         <pa-bar-chart
-          :bar-width="2"
+          :bar-width="20"
           :round="true"
           :data="[
             [100, 150, 500, 250, 400],
             [47, 100, 100, 430, 210]
           ]">
+            <pa-axis
+              position="right"
+              :label="'Y'"
+              :data="['A', 'B', 'C', 'D', 'E']"></pa-axis>
+            <pa-tooltip
+              :position="[10, 10]"
+              :style="{}"></pa-tooltip>
         </pa-bar-chart>
       </div>
   </div>
