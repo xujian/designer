@@ -114,6 +114,8 @@ export default class Canvas extends Vue {
       component: {
         name: 'PaPieChart',
         props: {
+          x: false,
+          y: false,
           data: mocks['pie-simple']
         }
       }
@@ -147,7 +149,11 @@ export default class Canvas extends Vue {
         props: {
           symbol: 1,
           data: mocks['scatter-simple'],
-          x: ['A', 'B', 'C', 'D', 'E', 'F']
+          x: {
+            type: 'value',
+            data: ['A', 'B', 'C', 'D', 'E', 'F'],
+            label: '{value} cm'
+          }
         }
       }
     }))
