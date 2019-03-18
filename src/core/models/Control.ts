@@ -93,11 +93,11 @@ export default class Control {
   static create (input: {
     uuid: string,
     title: string,
-    type: ControlTypes,
-    props: any,
+    type?: ControlTypes,
+    props?: any,
     position: number[],
     dimension: number[],
-    component: {
+    component?: {
       name: string,
       props: any
     }
@@ -110,9 +110,11 @@ export default class Control {
       input.position)
     control.dimension = Prop.create('position',
       input.dimension)
-    control.component = ChartFactory.make(
-      input.component.name,
-      input.component.props)
+    control.component = input.component
+      ? ChartFactory.make(
+        input.component.name,
+        input.component.props)
+      : null
     return control
   }
 

@@ -91,8 +91,6 @@ export default class Canvas extends Vue {
     this.controls.push(Control.create({
       uuid: utils.uuid(),
       title: 'Cargo 1',
-      type: ControlTypes.EMPTY,
-      props: {},
       position: [10, 10, 100],
       dimension: [320, 160],
       component: {
@@ -107,8 +105,6 @@ export default class Canvas extends Vue {
     this.controls.push(Control.create({
       uuid: utils.uuid(),
       title: 'Cargo 2',
-      type: ControlTypes.EMPTY,
-      props: {},
       position: [10, 200, 100],
       dimension: [320, 160],
       component: {
@@ -123,8 +119,6 @@ export default class Canvas extends Vue {
     this.controls.push(Control.create({
       uuid: utils.uuid(),
       title: 'Cargo 2',
-      type: ControlTypes.EMPTY,
-      props: {},
       position: [400, 10, 100],
       dimension: [320, 160],
       component: {
@@ -140,22 +134,8 @@ export default class Canvas extends Vue {
     this.controls.push(Control.create({
       uuid: utils.uuid(),
       title: 'Cargo 4',
-      type: ControlTypes.EMPTY,
-      props: {},
       position: [400, 200, 100],
-      dimension: [320, 160],
-      component: {
-        name: 'PaScatterChart',
-        props: {
-          symbol: 1,
-          data: mocks['scatter-simple'],
-          x: {
-            type: 'value',
-            data: ['A', 'B', 'C', 'D', 'E', 'F'],
-            label: '{value} cm'
-          }
-        }
-      }
+      dimension: [320, 160]
     }))
   }
 
