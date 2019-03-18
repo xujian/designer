@@ -54,8 +54,9 @@
               :style="{}"></pa-tooltip>
         </pa-bar-chart>
       </div-->
-      <div style="width:100%;height:100%;position:absolute;right:00px;top:0px">
+      <div style="width:100%;height:540px;position:absolute;right:00px;top:0px;index:5000">
         <pa-map-chart
+          :background="'#042'"
           :data="[mocks['map-simple']]">
         </pa-map-chart>
       </div>
@@ -218,14 +219,13 @@ export default class Canvas extends Vue {
   }
   mounted () {
     this.initEvents()
-    this.addControl()
+    // this.addControl()
   }
 }
 </script>
 
 <style lang="stylus">
 .board
-  background-color #666
   position relative
   .drag
     color #fff
