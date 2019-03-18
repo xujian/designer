@@ -30,7 +30,7 @@
           >
           </pa-control>
       </vue-draggable-resizable>
-      <div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
+      <!--div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
         <pa-bar-chart
           :bar-width="20"
           :round="true"
@@ -53,6 +53,11 @@
               :position="[10, 10]"
               :style="{}"></pa-tooltip>
         </pa-bar-chart>
+      </div-->
+      <div style="width:100%;height:100%;position:absolute;right:00px;top:0px">
+        <pa-map-chart
+          :data="[mocks['map-simple']]">
+        </pa-map-chart>
       </div>
   </div>
 </template>
@@ -82,6 +87,10 @@ export default class Canvas extends Vue {
   canvasSize: number[] = [1920, 540]
   zoom: number = 1
   controls: Control[] = []
+
+  get mocks () {
+    return mocks
+  }
 
   onDrag (control: Control) {
   }
