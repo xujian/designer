@@ -34,7 +34,7 @@
         <pa-bar-chart
           :bar-width="20"
           :round="true"
-          :styles="{background: '#480'}"
+          :styles="{background: '#240'}"
           :data="[
             [100, 150, 500, 250, 400],
             [47, 100, 100, 430, 210]
@@ -43,6 +43,12 @@
               position="right"
               :label="'Y'"
               :data="['A', 'B', 'C', 'D', 'E']"></pa-axis>
+            <pa-line-chart
+            :smooth="true"
+              :data="[
+                [100, 150, 500, 250, 400],
+                [47, 100, 100, 430, 210]
+              ]"></pa-line-chart>
             <pa-tooltip
               :position="[10, 10]"
               :style="{}"></pa-tooltip>
