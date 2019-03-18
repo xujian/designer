@@ -2,6 +2,7 @@ import Prop, { PropTypes } from './Prop';
 import Chart from './Chart'
 import Stencil from './Stencil'
 import Inspectable from '@/core/decorators/Inspectable'
+import utils from '@/core/utils'
 import { PaChart, ChartFactory } from 'vue-chartlib'
 
 /**
@@ -91,7 +92,7 @@ export default class Control {
    * @param input 输入参数
    */
   static create (input: {
-    uuid: string,
+    uuid?: string,
     title: string,
     type?: ControlTypes,
     props?: any,
@@ -103,7 +104,7 @@ export default class Control {
     }
   }): Control {
     let control = new Control()
-    control.uuid = input.uuid
+    control.uuid = input.uuid || utils.uuid()
     control.title = input.title || 'Untitled'
     control.type = input.type ||ControlTypes.EMPTY
     control.position = Prop.create('dimention',

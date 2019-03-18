@@ -89,7 +89,6 @@ export default class Canvas extends Vue {
 
   addControl () {
     this.controls.push(Control.create({
-      uuid: utils.uuid(),
       title: 'Cargo 1',
       position: [10, 10, 100],
       dimension: [320, 160],
@@ -103,7 +102,6 @@ export default class Canvas extends Vue {
       }
     }))
     this.controls.push(Control.create({
-      uuid: utils.uuid(),
       title: 'Cargo 2',
       position: [10, 200, 100],
       dimension: [320, 160],
@@ -117,7 +115,6 @@ export default class Canvas extends Vue {
       }
     }))
     this.controls.push(Control.create({
-      uuid: utils.uuid(),
       title: 'Cargo 2',
       position: [400, 10, 100],
       dimension: [320, 160],
@@ -132,7 +129,6 @@ export default class Canvas extends Vue {
       }
     }))
     this.controls.push(Control.create({
-      uuid: utils.uuid(),
       title: 'Cargo 4',
       position: [400, 200, 100],
       dimension: [320, 160]
