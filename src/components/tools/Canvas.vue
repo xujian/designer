@@ -55,10 +55,10 @@
         </pa-bar-chart>
       </div-->
       <div style="width:100%;height:540px;position:absolute;right:00px;top:0px;index:5000">
-        <pa-map-chart
-          :background="'#042'"
-          :data="[mocks['map-simple']]">
-        </pa-map-chart>
+        <pa-baidu-map>
+          <pa-scatter-chart
+          :data="[mocks['map-simple']]"></pa-scatter-chart>
+        </pa-baidu-map>
       </div>
   </div>
 </template>
@@ -229,4 +229,6 @@ export default class Canvas extends Vue {
   position relative
   .drag
     color #fff
+  .anchorBL
+    display none
 </style>
