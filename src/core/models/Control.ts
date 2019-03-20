@@ -59,6 +59,8 @@ export default class Control {
    */
   type: ControlTypes = ControlTypes.EMPTY
 
+  fixed: boolean = false
+
   @Inspectable({
     label: '位置',
     readonly: true
@@ -97,11 +99,13 @@ export default class Control {
     type?: ControlTypes,
     props?: any,
     position: number[],
-    dimension: number[],
+    dimension: [number, number] | [string, string],
     component?: {
       name: string,
-      props: any
-    }
+      props: any,
+      layers?: any[]
+    },
+    fixed?: boolean
   }): Control {
     let control = new Control()
     control.uuid = input.uuid || utils.uuid()
@@ -111,11 +115,14 @@ export default class Control {
       input.position)
     control.dimension = Prop.create('position',
       input.dimension)
-    control.component = input.component
-      ? ChartFactory.make(
+    control.fixed = input.fixed || false
+    if (input.component) {
+      let component = ChartFactory.make(
         input.component.name,
-        input.component.props)
-      : null
+        input.component.props,
+        input.component.layers)
+      control.component = component
+    }
     return control
   }
 

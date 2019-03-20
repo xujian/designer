@@ -14,7 +14,7 @@
     </q-toolbar>
     <h1 class="title">{{title}}</h1>
     <div class="control-component" :style="{width: width + 'px', height: height + 'px'}">
-      <div ref="component"></div>
+      <div ref="component" style="width:100px;height:100%"></div>
     </div>
     <slot></slot>
   </div>
@@ -64,7 +64,6 @@ export default PaControl
 .control
   position relative
   background-color #5a5a5a
-  border: 1px solid #ccc
   width 100%
   height 100%
   overflow hidden
@@ -95,4 +94,15 @@ export default PaControl
   .control-component
     width 100%
     height 100%
+&.drag
+  .control
+    border: 1px solid #ccc
+.map-control
+  border: none
+  position absolute
+.fullscreen-control
+  width 100%
+  height 100%
+  left 0
+  top 0
 </style>

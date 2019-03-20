@@ -5,6 +5,12 @@
       height: canvasSize[1] * zoom + 'px'
     }"
     @click.self="onBoardClick($event)">
+    <!-- <div class="control map-control">
+      <pa-baidu-map>
+        <pa-scatter-chart
+        :data="[mocks['map-simple']]"></pa-scatter-chart>
+      </pa-baidu-map>
+    </div> -->
     <vue-draggable-resizable
       v-for="(control, i) in controls"
       :key="i"
@@ -16,7 +22,7 @@
       @dragging="onDrag(control)"
       @resizing="onResize(control)"
       @activated="onActivated(control)"
-      class-name="drag"
+      :class-name="control.fixed ? 'fixed': 'drag'"
       :grid=[10,10]
       :parent="true">
         <pa-control
@@ -54,12 +60,6 @@
               :style="{}"></pa-tooltip>
         </pa-bar-chart>
       </div-->
-      <div style="width:100%;height:540px;position:absolute;right:00px;top:0px;index:5000">
-        <pa-baidu-map>
-          <pa-scatter-chart
-          :data="[mocks['map-simple']]"></pa-scatter-chart>
-        </pa-baidu-map>
-      </div>
   </div>
 </template>
 
@@ -105,6 +105,22 @@ export default class Canvas extends Vue {
   }
 
   addControl () {
+    this.controls.push(Control.create({
+      title: 'Map 1',
+      position: [0, 0, 100],
+      dimension: [1920, 540],
+      fixed: true,
+      component: {
+        name: 'PaBaiduMap',
+        props: {
+        },
+        layers: [{
+          name: 'PaScatterChart',
+          type: 'baidu-map-scatter',
+          data: [mocks['map-simple']]
+        }]
+      }
+    }))
     this.controls.push(Control.create({
       title: 'Cargo 1',
       position: [10, 10, 100],
@@ -219,7 +235,7 @@ export default class Canvas extends Vue {
   }
   mounted () {
     this.initEvents()
-    // this.addControl()
+    this.addControl()
   }
 }
 </script>
@@ -227,6 +243,7 @@ export default class Canvas extends Vue {
 <style lang="stylus">
 .board
   position relative
+  background: #444
   .drag
     color #fff
   .anchorBL
