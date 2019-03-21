@@ -14,7 +14,7 @@
     </q-toolbar>
     <h1 class="title">{{title}}</h1>
     <div class="control-component" :style="{width: width + 'px', height: height + 'px'}">
-      <div ref="component" style="width:100px;height:100%"></div>
+      <div ref="component" style="width:100%;height:100%"></div>
     </div>
     <slot></slot>
   </div>

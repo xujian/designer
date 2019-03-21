@@ -117,7 +117,7 @@ export default class Canvas extends Vue {
         layers: [{
           name: 'PaScatterChart',
           type: 'baidu-map-scatter',
-          data: [mocks['map-simple']]
+          data: [mocks['map-scatter']]
         }]
       }
     }))
