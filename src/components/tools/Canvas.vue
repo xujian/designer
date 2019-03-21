@@ -38,7 +38,7 @@
           @inspect="onControlInspect">
           </pa-control>
       </vue-draggable-resizable>
-      <!--div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
+      <div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
         <pa-bar-chart
           :bar-width="20"
           :round="true"
@@ -53,15 +53,17 @@
               :data="['A', 'B', 'C', 'D', 'E']"></pa-axis>
             <pa-line-chart
             :smooth="true"
-              :data="[
-                [100, 150, 500, 250, 400],
-                [47, 100, 100, 430, 210]
-              ]"></pa-line-chart>
+            :data="[
+              [100, 150, 500, 250, 400],
+              [47, 100, 100, 430, 210]
+            ]">
+              <pa-marks type="max-min"></pa-marks>
+            </pa-line-chart>
             <pa-tooltip
               :position="[10, 10]"
               :style="{}"></pa-tooltip>
         </pa-bar-chart>
-      </div-->
+      </div>
   </div>
 </template>
 
@@ -114,6 +116,7 @@ export default class Canvas extends Vue {
   }
 
   addControl () {
+    return
     this.controls.push(Control.create({
       title: 'Map 1',
       position: [0, 0, 100],
