@@ -104,7 +104,6 @@ export default class Canvas extends Vue {
   }
 
   onResize () {
-      this.selected, this.selectedControl)
     this.selectedControl 
       && this.selectedControl.repaint()
   }
