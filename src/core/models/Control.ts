@@ -76,9 +76,7 @@ export default class Control {
     Prop.create('dimension', [480, 200], PropTypes.NUMBER_ARRAY)
 
   constructor () {
-    console.log('Control.ts constructor')
     this.title = 'Untitled'
-    this.component = undefined
   }
 
   applyProps (props: Prop[]): void {
@@ -87,6 +85,10 @@ export default class Control {
         this.title = p.value
       }
     })
+  }
+
+  repaint () {
+    this.component.repaint()
   }
 
   /**

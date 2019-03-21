@@ -19,21 +19,23 @@
       :w="control.dimension.value[0]"
       :h="control.dimension.value[1]"
       :handles="['bm', 'br', 'mr']"
+      :draggable="!control.fixed"
+      :resizable="!control.fixed"
+      drag-handle=".titlebar .drag"
       @dragging="onDrag(control)"
-      @resizing="onResize(control)"
+      @resizestop="onResize"
       @activated="onActivated(control)"
-      :class-name="control.fixed ? 'fixed': 'drag'"
+      :class-name="control.fixed ? 'fixed': 'draggable'"
       :grid=[10,10]
       :parent="true">
         <pa-control
           :title="control.title"
-          :width="control.dimension.value[0] - 2"
-          :height="control.dimension.value[1] - 2 -25"
+          :uuid="control.uuid"
           :class="{
             selected: selected === control.uuid
           }"
           :component="control.component"
-          >
+          @inspect="onControlInspect">
           </pa-control>
       </vue-draggable-resizable>
       <!--div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
@@ -74,6 +76,7 @@ import utils from '@/core/utils'
 import Chart from '@/core/models/Chart'
 import { mocks } from 'vue-chartlib'
 
+
 @Component({
   components: {
     VueDraggableResizable,
@@ -93,10 +96,17 @@ export default class Canvas extends Vue {
     return mocks
   }
 
+  get selectedControl () {
+    return this.controls.find(c => c.uuid === this.selected)
+  }
+
   onDrag (control: Control) {
   }
 
-  onResize (control: Control) {
+  onResize () {
+      this.selected, this.selectedControl)
+    this.selectedControl 
+      && this.selectedControl.repaint()
   }
 
   onActivated (control: Control) {
@@ -182,6 +192,10 @@ export default class Canvas extends Vue {
     }))
   }
 
+  onControlInspect (uuid: string) {
+    this.selected = uuid
+  }
+
   inspect (control: Control) {
     this.aside('inspector', {
       // 打开右侧栏
@@ -214,7 +228,7 @@ export default class Canvas extends Vue {
   }
 
   onBoardClick ($event: any) {
-    this.selected = ''
+    // this.selected = ''
   }
 
   @Watch('selected')

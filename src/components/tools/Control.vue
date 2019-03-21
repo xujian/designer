@@ -3,17 +3,25 @@
     <q-toolbar class="titlebar justify-end">
       <q-btn-group>
         <q-btn flat
-          class="button">
+          class="button delete">
           <q-icon name="close"></q-icon>
         </q-btn>
         <q-btn flat
-          class="button">
+          class="button drag">
+          <q-icon name="drag_indicator"></q-icon>
+        </q-btn>
+        <q-btn flat
+          class="button settings" @click="$emit('inspect', uuid)">
+          <q-icon name="settings"></q-icon>
+        </q-btn>
+        <q-btn flat
+          class="button menu-button">
           <q-icon name="arrow_right"></q-icon>
         </q-btn>
       </q-btn-group>
     </q-toolbar>
     <h1 class="title">{{title}}</h1>
-    <div class="control-component" :style="{width: width + 'px', height: height + 'px'}">
+    <div class="control-component">
       <div ref="component" style="width:100%;height:100%"></div>
     </div>
     <slot></slot>
@@ -32,6 +40,9 @@ import PaControlMenu from './ControlMenu.vue'
 })
 class PaControl extends Vue {
   name: string = 'PaControl'
+
+  @Prop({ default: '' })
+  uuid: string | undefined
 
   @Prop({ default: '' })
   title: string | undefined
@@ -53,7 +64,6 @@ class PaControl extends Vue {
     if (this.component) {
       this.component.$mount(this.$refs.component)
     }
-    console.log('globalConfigs-----------------------', this.$chartlib.globalConfigs)
   }
 }
 
@@ -63,7 +73,7 @@ export default PaControl
 <style lang="stylus">
 .control
   position relative
-  background-color #5a5a5a
+  background-color rgba(0,0,0,0.33)
   width 100%
   height 100%
   overflow hidden
@@ -81,9 +91,10 @@ export default PaControl
     font-size 12px
     min-height 24px
     position absolute
+    z-index 100
     top 0
     width 100%
-    background-color rgba(0,0,0,0.1)
+    background-color rgba(0,0,0,0.1) !important
     transform translateY(-24px)
     transition all 0.5s
     .button
@@ -94,7 +105,10 @@ export default PaControl
   .control-component
     width 100%
     height 100%
-&.drag
+    position absolute
+    top 0
+    left 0
+&.draggable
   .control
     border: 1px solid #ccc
 .map-control
