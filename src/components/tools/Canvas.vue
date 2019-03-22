@@ -52,10 +52,11 @@
               :label="'Y'"
               :data="['A', 'B', 'C', 'D', 'E']"></pa-axis>
             <pa-line-chart
+            axis="right"
             :smooth="true"
             :data="[
-              [100, 150, 500, 250, 400],
-              [47, 100, 100, 430, 210]
+              [0.25, 0.87, 0.33, 0.5, 0.12],
+              [0.78, 0.76, 0.34, 0.69, 0.78]
             ]">
               <pa-marks type="max-min"></pa-marks>
             </pa-line-chart>
