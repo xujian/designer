@@ -47,17 +47,18 @@
             [100, 150, 500, 250, 400],
             [47, 100, 100, 430, 210]
           ]">
+            <pa-legend align="right" :data="['A', 'B', 'C', 'D']"></pa-legend>
             <pa-axis
               position="right"
               :label="'Y'"
               :data="['A', 'B', 'C', 'D', 'E']"></pa-axis>
             <pa-line-chart
-            axis="right"
-            :smooth="true"
-            :data="[
-              [0.25, 0.87, 0.33, 0.5, 0.12],
-              [0.78, 0.76, 0.34, 0.69, 0.78]
-            ]">
+              :axis="'right'"
+              :smooth="true"
+              :data="[
+                [0.25, 0.87, 0.33, 0.5, 0.12],
+                [0.78, 0.76, 0.34, 0.69, 0.78]
+              ]">
               <pa-marks type="max-min"></pa-marks>
             </pa-line-chart>
             <pa-tooltip
@@ -117,7 +118,6 @@ export default class Canvas extends Vue {
   }
 
   addControl () {
-    return
     this.controls.push(Control.create({
       title: 'Map 1',
       position: [0, 0, 100],
@@ -128,9 +128,11 @@ export default class Canvas extends Vue {
         props: {
         },
         layers: [{
-          name: 'PaScatterChart',
-          type: 'baidu-map-scatter',
-          data: [mocks['map-scatter']]
+          props: {
+            name: 'PaScatterChart',
+            type: 'baidu-map-scatter',
+            data: [mocks['map-scatter']]
+          }
         }]
       }
     }))
@@ -179,20 +181,33 @@ export default class Canvas extends Vue {
       position: [400, 200, 100],
       dimension: [320, 160],
       component: {
-        name: 'PaScatterChart',
+        name: 'PaTreeChart',
         props: {
-          symbol: 1,
-          data: mocks['scatter-simple'],
-          x: {
-            type: 'value',
-            label: '{value} cm'
-          },
-          styles: {
-            background: '#940'
-          }
+          x: false,
+          y: false,
+          data: mocks['tree-simple']
         }
       }
     }))
+    // this.controls.push(Control.create({
+    //   title: 'Cargo 4',
+    //   position: [400, 200, 100],
+    //   dimension: [320, 160],
+    //   component: {
+    //     name: 'PaScatterChart',
+    //     props: {
+    //       symbol: 1,
+    //       data: mocks['scatter-simple'],
+    //       x: {
+    //         type: 'value',
+    //         label: '{value} cm'
+    //       },
+    //       styles: {
+    //         background: '#940'
+    //       }
+    //     }
+    //   }
+    // }))
   }
 
   onControlInspect (uuid: string) {
