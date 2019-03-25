@@ -225,8 +225,8 @@ export default class Canvas extends Vue {
     console.log('Canvas.vue---------onControlInspect=====', c)
     this.$http.post('/api/components', {
       plexid: uuid,
-      name: c.name,
-      props: c.props
+      name: c.component.name,
+      props: c.component.props
     })
     .then((res: any) => {
       console.log('this.$http.get^^^^^^^^^^^^^', res)
