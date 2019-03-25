@@ -1,5 +1,5 @@
 <template>
-  <div class="control">
+  <div class="control" :uuid="uuid">
     <q-toolbar class="titlebar justify-end">
       <q-btn-group>
         <q-btn flat
