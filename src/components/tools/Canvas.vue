@@ -95,6 +95,7 @@ export default class Canvas extends Vue {
   canvasSize: number[] = [1920, 540]
   zoom: number = 1
   controls: Control[] = []
+  controlsSource: any[] = []
 
   get mocks () {
     return mocks
@@ -117,101 +118,119 @@ export default class Canvas extends Vue {
     this.selected = control.uuid
   }
 
-  addControl () {
-    this.controls.push(Control.create({
-      title: 'Map 1',
-      position: [0, 0, 100],
-      dimension: [1920, 540],
-      fixed: true,
-      component: {
-        name: 'PaBaiduMap',
-        props: {
-        },
-        layers: [{
+  loadControls () {
+    this.$http.get('/api/plexes/abcde/components')
+      .then((res: any) => {
+        console.log('this.$http.get^^^^^^^^^^^^^', res)
+      })
+    this.controlsSource = [
+      {
+        uuid: 'c359d46f-4e32-4802-816f-36f9df1dd2e0',
+        title: 'Map 1',
+        position: [0, 0, 100],
+        dimension: [1920, 540],
+        fixed: true,
+        component: {
+          name: 'PaBaiduMap',
           props: {
-            name: 'PaScatterChart',
-            type: 'baidu-map-scatter',
-            data: [mocks['map-scatter']]
+          },
+          layers: [{
+            props: {
+              name: 'PaScatterChart',
+              type: 'baidu-map-scatter',
+              data: [mocks['map-scatter']]
+            }
+          }]
+        }
+      }, {
+        uuid: utils.uuid(),
+        title: 'Cargo 1',
+        position: [10, 10, 100],
+        dimension: [320, 160],
+        component: {
+          name: 'PaBarChart',
+          props: {
+            barWidth: 8,
+            round: true,
+            data: mocks['bar-simple']
           }
-        }]
-      }
-    }))
-    this.controls.push(Control.create({
-      title: 'Cargo 1',
-      position: [10, 10, 100],
-      dimension: [320, 160],
-      component: {
-        name: 'PaBarChart',
-        props: {
-          barWidth: 8,
-          round: true,
-          data: mocks['bar-simple']
+        }
+      }, {
+        uuid: utils.uuid(),
+        title: 'Cargo 2',
+        position: [10, 200, 100],
+        dimension: [320, 160],
+        component: {
+          name: 'PaPieChart',
+          props: {
+            x: false,
+            y: false,
+            data: mocks['pie-simple']
+          }
+        }
+      }, {
+        uuid: utils.uuid(),
+        title: 'Cargo 2',
+        position: [400, 10, 100],
+        dimension: [320, 160],
+        component: {
+          name: 'PaLineChart',
+          props: {
+            lineWidth: 2,
+            smooth: true,
+            data: mocks['line-simple'],
+            x: ['A', 'B', 'C', 'D', 'E', 'F']
+          }
+        }
+      }, {
+        uuid: utils.uuid(),
+        title: 'Cargo 4',
+        position: [400, 200, 100],
+        dimension: [320, 160],
+        component: {
+          name: 'PaTreeChart',
+          props: {
+            x: false,
+            y: false,
+            data: mocks['tree-simple']
+          }
+        }
+      }, {
+        uuid: utils.uuid(),
+        title: 'Cargo 4',
+        position: [400, 200, 100],
+        dimension: [320, 160],
+        component: {
+          name: 'PaScatterChart',
+          props: {
+            symbol: 1,
+            data: mocks['scatter-simple'],
+            x: {
+              type: 'value',
+              label: '{value} cm'
+            },
+            styles: {
+              background: '#940'
+            }
+          }
         }
       }
-    }))
-    this.controls.push(Control.create({
-      title: 'Cargo 2',
-      position: [10, 200, 100],
-      dimension: [320, 160],
-      component: {
-        name: 'PaPieChart',
-        props: {
-          x: false,
-          y: false,
-          data: mocks['pie-simple']
-        }
-      }
-    }))
-    this.controls.push(Control.create({
-      title: 'Cargo 2',
-      position: [400, 10, 100],
-      dimension: [320, 160],
-      component: {
-        name: 'PaLineChart',
-        props: {
-          lineWidth: 2,
-          smooth: true,
-          data: mocks['line-simple'],
-          x: ['A', 'B', 'C', 'D', 'E', 'F']
-        }
-      }
-    }))
-    this.controls.push(Control.create({
-      title: 'Cargo 4',
-      position: [400, 200, 100],
-      dimension: [320, 160],
-      component: {
-        name: 'PaTreeChart',
-        props: {
-          x: false,
-          y: false,
-          data: mocks['tree-simple']
-        }
-      }
-    }))
-    // this.controls.push(Control.create({
-    //   title: 'Cargo 4',
-    //   position: [400, 200, 100],
-    //   dimension: [320, 160],
-    //   component: {
-    //     name: 'PaScatterChart',
-    //     props: {
-    //       symbol: 1,
-    //       data: mocks['scatter-simple'],
-    //       x: {
-    //         type: 'value',
-    //         label: '{value} cm'
-    //       },
-    //       styles: {
-    //         background: '#940'
-    //       }
-    //     }
-    //   }
-    // }))
+    ]
+    this.controls = this.controlsSource.map(c => Control.create(c))
   }
 
   onControlInspect (uuid: string) {
     this.selected = uuid
+    let c = this.controlsSource.find(c => c.uuid === uuid)
+    console.log('Canvas.vue---------onControlInspect=====', c)
+    this.$http.post('/api/components', {
+      plexid: uuid,
+      name: c.name,
+      props: c.props
+    })
+    .then((res: any) => {
+      console.log('this.$http.get^^^^^^^^^^^^^', res)
+    })
   }
 
   inspect (control: Control) {
@@ -267,7 +286,7 @@ export default class Canvas extends Vue {
   }
   mounted () {
     this.initEvents()
-    this.addControl()
+    this.loadControls()
   }
 }
 </script>
