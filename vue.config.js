@@ -5,14 +5,23 @@ module.exports = {
       importAll: true
     }
   },
-  configureWebpack: {
-    resolve: {
-      alias: {
-        'vue$': 'vue/dist/vue.esm.js'
+  devServer: {
+    proxy: {
+      '^/api/': {
+        target: 'https://designer-server.breezemakes.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '/api/': '/'
+        }
       }
     }
   },
-  transpileDependencies: [
-    /[\\\/]node_modules[\\\/]quasar-framework[\\\/]/
-  ]
+  configureWebpack: {
+    resolve: {
+      alias: {
+        vue$: 'vue/dist/vue.esm.js'
+      }
+    }
+  },
+  transpileDependencies: [/[\\\/]node_modules[\\\/]quasar-framework[\\\/]/]
 }
