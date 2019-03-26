@@ -22,7 +22,7 @@
       :draggable="!control.fixed"
       :resizable="!control.fixed"
       drag-handle=".titlebar .drag"
-      @dragging="onDrag(control)"
+      @dragstop="onDragStop"
       @resizestop="onResize"
       @activated="onActivated(control)"
       :class-name="control.fixed ? 'fixed': 'draggable'"
@@ -106,7 +106,13 @@ export default class Canvas extends Vue {
     return this.controls.find(c => c.uuid === this.selected)
   }
 
-  onDrag (control: Control) {
+  onDragStop (x: number, y: number) {
+    this.$http.post(`/api/plexes/${this.selected}`, {
+      position: {x, y}
+    })
+    .then((res: any) => {
+      console.log('this.$http.get^^^^^^^^^^^^^', res)
+    })
   }
 
   onResize () {
@@ -158,7 +164,7 @@ export default class Canvas extends Vue {
             props: {
               name: 'PaScatterChart',
               type: 'baidu-map-scatter',
-              data: [mocks['map-scatter']]
+              data: 'mocks:map-scatter'
             }
           }]
         }
