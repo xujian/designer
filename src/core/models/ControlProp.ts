@@ -1,4 +1,4 @@
-import Prop, { PropTypes } from './Prop'
+import Prop from './Prop'
 
 export default class ControlProp extends Prop {
   constructor() {

@@ -1,10 +1,10 @@
 const PropDefs = Object.freeze({
-  POSITION: {
+  position: {
     name: 'position',
     type: 'number-pair',
     label: '位置'
   },
-  DIMENSION: {
+  dimention: {
     name: 'dimension',
     type: 'number-pair',
     label: '尺寸'

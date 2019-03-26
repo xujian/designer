@@ -27,10 +27,7 @@ export default function Inspectable (options: {
             let originalProp = control[p.name]
             let prop = originalProp.constructor.name === Prop.name
               ? originalProp
-              : Prop.from({
-                  ...p,
-                  value: control[p.name],
-                })
+              : new Prop(propertyKey,control[p.name])
             return prop
           })
         }

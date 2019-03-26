@@ -1,4 +1,5 @@
-import Prop, { PropTypes } from './Prop';
+import Prop from './Prop'
+import * as PropTypes from './PropTypes'
 import Chart from './Chart'
 import Stencil from './Stencil'
 import Inspectable from '@/core/decorators/Inspectable'
@@ -35,7 +36,6 @@ export enum ControlTypes {
  * 画布上可以拖动的控件
  */
 export default class Control {
-
   uuid: string = ''
   /**
    * Components (chart or non-chart thing) in the control
@@ -65,15 +65,13 @@ export default class Control {
     label: '位置',
     readonly: true
   })
-  public position: Prop = 
-    Prop.create('position', [10, 10], PropTypes.NUMBER_ARRAY)
+  public position: Prop<PropTypes.Position> | undefined
 
   @Inspectable({
     label: '尺寸',
     readonly: true
   })
-  public dimension: Prop = 
-    Prop.create('dimension', [480, 200], PropTypes.NUMBER_ARRAY)
+  public dimension: Prop<PropTypes.Dimension> | undefined
 
   constructor () {
     this.title = 'Untitled'
@@ -100,8 +98,15 @@ export default class Control {
     title: string,
     type?: ControlTypes,
     props?: any,
-    position: number[],
-    dimension: [number, number] | [string, string],
+    position: {
+      x: number,
+      y: number,
+      z: number
+    },
+    dimension: {
+      width: number | string,
+      height: number | string
+    },
     component?: {
       name: string,
       props: any,
@@ -113,11 +118,12 @@ export default class Control {
     control.uuid = input.uuid || utils.uuid()
     control.title = input.title || 'Untitled'
     control.type = input.type ||ControlTypes.EMPTY
-    control.position = Prop.create('dimention',
-      input.position)
-    control.dimension = Prop.create('position',
-      input.dimension)
+    control.position = Prop.create<PropTypes.Position>(
+      'position', input.position)
+    control.dimension = Prop.create<PropTypes.Dimension>(
+      'dimension', input.dimension)
     control.fixed = input.fixed || false
+    console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxControls.ts-------make component', input.component)
     if (input.component) {
       let component = ChartFactory.make(
         input.component.name,

@@ -14,10 +14,10 @@
     <vue-draggable-resizable
       v-for="(control, i) in controls"
       :key="i"
-      :x="control.position.value[0]"
-      :y="control.position.value[1]"
-      :w="control.dimension.value[0]"
-      :h="control.dimension.value[1]"
+      :x="control.position.value.x"
+      :y="control.position.value.y"
+      :w="parseInt(control.dimension.value.width)"
+      :h="parseInt(control.dimension.value.height)"
       :handles="['bm', 'br', 'mr']"
       :draggable="!control.fixed"
       :resizable="!control.fixed"
@@ -94,6 +94,7 @@ export default class Canvas extends Vue {
   selected: string = ''
   canvasSize: number[] = [1920, 540]
   zoom: number = 1
+  plexes: any[] = []
   controls: Control[] = []
   controlsSource: any[] = []
 
@@ -119,16 +120,35 @@ export default class Canvas extends Vue {
   }
 
   loadControls () {
-    this.$http.get('/api/plexes/abcde/components')
+    this.$http.get('/api/plexes')
       .then((res: any) => {
-        console.log('this.$http.get^^^^^^^^^^^^^', res)
+        console.log('Canvas.loadControls~~/api/plexes~~~~~~~~~', res.data)
+        this.plexes = res.data
+        const plexids = this.plexes.map(p => p.uuid)
+        this.$http.get(`/api/plexes/${plexids.join(',')}/components`)
+          .then((res2: any) => {
+            console.log('Canvas.loadControls~~~~~~~~~~~', res2.data)
+            res2.data.forEach((c: any) => {
+              let plex = this.plexes.find((pl: any) => pl.uuid === c.plexid)
+              plex.component = c
+            })
+            this.controls = this.plexes.map(c => Control.create(c))
+          }
+        )
       })
     this.controlsSource = [
       {
         uuid: 'c359d46f-4e32-4802-816f-36f9df1dd2e0',
         title: 'Map 1',
-        position: [0, 0, 100],
-        dimension: [1920, 540],
+        position: {
+          x: 0,
+          y: 0,
+          z: 1
+        },
+        dimension: {
+          width: 1920,
+          height: 540
+        },
         fixed: true,
         component: {
           name: 'PaBaiduMap',
@@ -144,62 +164,16 @@ export default class Canvas extends Vue {
         }
       }, {
         uuid: utils.uuid(),
-        title: 'Cargo 1',
-        position: [10, 10, 100],
-        dimension: [320, 160],
-        component: {
-          name: 'PaBarChart',
-          props: {
-            barWidth: 8,
-            round: true,
-            data: mocks['bar-simple']
-          }
-        }
-      }, {
-        uuid: utils.uuid(),
-        title: 'Cargo 2',
-        position: [10, 200, 100],
-        dimension: [320, 160],
-        component: {
-          name: 'PaPieChart',
-          props: {
-            x: false,
-            y: false,
-            data: mocks['pie-simple']
-          }
-        }
-      }, {
-        uuid: utils.uuid(),
-        title: 'Cargo 2',
-        position: [400, 10, 100],
-        dimension: [320, 160],
-        component: {
-          name: 'PaLineChart',
-          props: {
-            lineWidth: 2,
-            smooth: true,
-            data: mocks['line-simple'],
-            x: ['A', 'B', 'C', 'D', 'E', 'F']
-          }
-        }
-      }, {
-        uuid: utils.uuid(),
         title: 'Cargo 4',
-        position: [400, 200, 100],
-        dimension: [320, 160],
-        component: {
-          name: 'PaTreeChart',
-          props: {
-            x: false,
-            y: false,
-            data: mocks['tree-simple']
-          }
-        }
-      }, {
-        uuid: utils.uuid(),
-        title: 'Cargo 4',
-        position: [400, 200, 100],
-        dimension: [320, 160],
+        position: {
+          x: 800,
+          y: 10,
+          z: 100
+        },
+        dimension: {
+          width: 320,
+          height: 160
+        },
         component: {
           name: 'PaScatterChart',
           props: {
@@ -216,7 +190,7 @@ export default class Canvas extends Vue {
         }
       }
     ]
-    this.controls = this.controlsSource.map(c => Control.create(c))
+    // this.controls = this.controlsSource.map(c => Control.create(c))
   }
 
   onControlInspect (uuid: string) {
@@ -227,6 +201,13 @@ export default class Canvas extends Vue {
       plexid: uuid,
       name: c.component.name,
       props: c.component.props
+    })
+    this.$http.post('/api/plexes', {
+      uuid: uuid,
+      fixed: c.fixed,
+      title: c.title,
+      position: c.position,
+      dimension: c.dimension
     })
     .then((res: any) => {
       console.log('this.$http.get^^^^^^^^^^^^^', res)
