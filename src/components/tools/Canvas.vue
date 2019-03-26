@@ -79,6 +79,8 @@ import Prop from '@/core/models/Prop'
 import utils from '@/core/utils'
 import Chart from '@/core/models/Chart'
 import { mocks } from 'vue-chartlib'
+import api from '../../api'
+import components from '@/api/components';
 
 
 @Component({
@@ -107,11 +109,8 @@ export default class Canvas extends Vue {
   }
 
   onDragStop (x: number, y: number) {
-    this.$http.post(`/api/plexes/${this.selected}`, {
+    api.canvas.savePlex(this.selected, {
       position: {x, y}
-    })
-    .then((res: any) => {
-      console.log('this.$http.get^^^^^^^^^^^^^', res)
     })
   }
 
@@ -126,22 +125,17 @@ export default class Canvas extends Vue {
   }
 
   loadControls () {
-    this.$http.get('/api/plexes')
-      .then((res: any) => {
-        console.log('Canvas.loadControls~~/api/plexes~~~~~~~~~', res.data)
-        this.plexes = res.data
-        const plexids = this.plexes.map(p => p.uuid)
-        this.$http.get(`/api/plexes/${plexids.join(',')}/components`)
-          .then((res2: any) => {
-            console.log('Canvas.loadControls~~~~~~~~~~~', res2.data)
-            res2.data.forEach((c: any) => {
-              let plex = this.plexes.find((pl: any) => pl.uuid === c.plexid)
-              plex.component = c
-            })
-            this.controls = this.plexes.map(c => Control.create(c))
-          }
-        )
+    api.canvas.loadPlexes().then(plexes => {
+      this.plexes = plexes
+      const plexids = this.plexes.map(p => p.uuid)
+      api.components.loadByPlex(plexids.join(',')).then(components => {
+        components.forEach((c: any) => {
+          let plex = this.plexes.find((pl: any) => pl.uuid === c.plexid)
+          plex.component = c
+        })
+        this.controls = this.plexes.map(c => Control.create(c))
       })
+    })
     this.controlsSource = [
       {
         uuid: 'c359d46f-4e32-4802-816f-36f9df1dd2e0',
