@@ -16,6 +16,7 @@
       :key="i"
       :x="control.position.value.x"
       :y="control.position.value.y"
+      :z="control.position.value.z"
       :w="parseInt(control.dimension.value.width)"
       :h="parseInt(control.dimension.value.height)"
       :handles="['bm', 'br', 'mr']"
@@ -136,66 +137,12 @@ export default class Canvas extends Vue {
         this.controls = this.plexes.map(c => Control.create(c))
       })
     })
-    this.controlsSource = [
-      {
-        uuid: 'c359d46f-4e32-4802-816f-36f9df1dd2e0',
-        title: 'Map 1',
-        position: {
-          x: 0,
-          y: 0,
-          z: 1
-        },
-        dimension: {
-          width: 1920,
-          height: 540
-        },
-        fixed: true,
-        component: {
-          name: 'PaBaiduMap',
-          props: {
-          },
-          layers: [{
-            props: {
-              name: 'PaScatterChart',
-              type: 'baidu-map-scatter',
-              data: 'mocks:map-scatter'
-            }
-          }]
-        }
-      }, {
-        uuid: utils.uuid(),
-        title: 'Cargo 4',
-        position: {
-          x: 800,
-          y: 10,
-          z: 100
-        },
-        dimension: {
-          width: 320,
-          height: 160
-        },
-        component: {
-          name: 'PaScatterChart',
-          props: {
-            symbol: 1,
-            data: mocks['scatter-simple'],
-            x: {
-              type: 'value',
-              label: '{value} cm'
-            },
-            styles: {
-              background: '#940'
-            }
-          }
-        }
-      }
-    ]
     // this.controls = this.controlsSource.map(c => Control.create(c))
   }
 
   onControlInspect (uuid: string) {
     this.selected = uuid
-    let c = this.controlsSource.find(c => c.uuid === uuid)
+    let c = this.plexes.find(c => c.uuid === uuid)
     console.log('Canvas.vue---------onControlInspect=====', c)
     this.$http.post('/api/components', {
       plexid: uuid,
