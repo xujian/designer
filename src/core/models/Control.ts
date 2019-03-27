@@ -1,5 +1,5 @@
 import Prop from './Prop'
-import * as PropTypes from './PropTypes'
+import PropTypes from './PropTypes'
 import Chart from './Chart'
 import Stencil from './Stencil'
 import Inspectable from '@/core/decorators/Inspectable'

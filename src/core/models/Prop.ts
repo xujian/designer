@@ -1,5 +1,4 @@
 import PropDefs from './PropDefs'
-
 /**
  * Base for Prop of Control other Classes
  */
@@ -14,7 +13,7 @@ export default class Prop<T = string> {
   private __value: T | null = null
 
   get value (): T | null {
-    return this.__value
+    return this.__value as T
   }
 
   set value (v: T | null) {
@@ -23,7 +22,7 @@ export default class Prop<T = string> {
 
   constructor (name: string, value: T) {
     this.name = name
-    this.__value = value as T
+    this.__value = <T>value
   }
 
   static create<T> (options: {
@@ -32,7 +31,7 @@ export default class Prop<T = string> {
     label?: string,
     readonly?: boolean
   }): Prop<T> {
-    let prop = new Prop<T>(options.name, options.value as T)
+    let prop = new Prop<T>(options.name, options.value)
     prop.label = options.label
     prop.readonly = options.readonly || false
     return prop
