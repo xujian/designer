@@ -94,7 +94,7 @@ export default {
     background-color #00796B
     color #fff
   .aside // 右侧栏
-    background-color #444
+    background-color rgba(68, 68, 68, 0.5)
     color #fff
 .aside
   background-color #333
