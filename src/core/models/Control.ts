@@ -118,10 +118,12 @@ export default class Control {
     control.uuid = input.uuid || utils.uuid()
     control.title = input.title || 'Untitled'
     control.type = input.type ||ControlTypes.EMPTY
-    control.position = Prop.create<PropTypes.Position>(
-      'position', input.position)
-    control.dimension = Prop.create<PropTypes.Dimension>(
-      'dimension', input.dimension)
+    control.position = new Prop<PropTypes.Position>(
+      'position', input.position
+    )
+    control.dimension = new Prop<PropTypes.Dimension>(
+        'dimension', input.dimension,
+      )
     control.fixed = input.fixed || false
     console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxControls.ts-------make component', input.component)
     if (input.component) {

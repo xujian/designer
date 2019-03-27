@@ -15,20 +15,27 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop as PropDecorator } from 'vue-property-decorator'
-import Prop, { PropTypes } from '@/core/models/Prop'
+import Prop from '@/core/models/Prop'
 
 @Component
 export default class PropItem extends Vue {
   @PropDecorator({ default: null })
   value!: Prop
 
+  get prop () {
+    return this.value
+  }
+
   mounted () {
-    console.log('PropItem.vue value',
-      this.value)
+    console.log('PropItem.vue valueXCXCXCXCXCXCXCXC/////////////',
+      this.value,
+      Reflect.getMetadata('type', this, 'value'))
   }
 
   typeIs (name: string): boolean {
-    console.log('typeIs()', this.value.type)
+    console.log('typeIs()',
+      this.prop.value.constructor.name, 
+      Reflect.getMetadata('type', this, 'prop'))
     return this.value.type === name
   }
 

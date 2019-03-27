@@ -6,6 +6,7 @@ import './registerServiceWorker'
 import mixins from './mixins'
 import ChartLib from 'vue-chartlib'
 import axios from 'axios'
+import 'reflect-metadata'
 
 const plugins = require.context('./plugins', true, /index.js$/)
 plugins.keys().forEach(p => {

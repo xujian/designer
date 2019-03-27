@@ -1,5 +1,5 @@
 import Prop from '@/core/models/Prop'
-
+import 'reflect-metadata'
 export const INSPECTABLE_FIELD_NAME = '__inspectable__'
 export const INSPECTABLE_METHOD_NAME = 'getInspectableProps'
 /**
@@ -25,17 +25,30 @@ export default function Inspectable (options: {
           let props = control[INSPECTABLE_FIELD_NAME]
           return props.map((p: any) => {
             let originalProp = control[p.name]
-            let prop = originalProp.constructor.name === Prop.name
-              ? originalProp
-              : new Prop(propertyKey,control[p.name])
-            return prop
+            console.log('Inspectable.ts-----()())()()()()())(()(', originalProp)
+            if (originalProp.constructor.name === Prop.name) {
+              console.log(')))))))))))) is Prop')
+              return originalProp
+            } else {
+              console.log(')))))))))))) is NOT Prop')
+              let prop = Prop.create({
+                name: propertyKey,
+                value: control[p.name],
+                label: p.label,
+                readonly: p.readonly
+              })
+              return prop
+            }
           })
         }
       })
     }
-    prototype[INSPECTABLE_FIELD_NAME].push({
+    console.log('Inspectable.ts()())()()()()())(()(', options)
+    let inspected = {
       name: propertyKey,
       ...options
-    })
+    }
+    Reflect.defineMetadata('type', Prop, inspected)
+    prototype[INSPECTABLE_FIELD_NAME].push(inspected)
   }
 }

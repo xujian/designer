@@ -5,6 +5,7 @@ import PropDefs from './PropDefs'
  */
 export default class Prop<T = string> {
   name: string
+  label: string | undefined
   /**
    * 只读
    */
@@ -22,11 +23,18 @@ export default class Prop<T = string> {
 
   constructor (name: string, value: T) {
     this.name = name
-    this.__value = value
+    this.__value = value as T
   }
 
-  static create<T> (name: string, value: T): Prop<T> {
-    let prop = new Prop<T>(name, value)
+  static create<T> (options: {
+    name: string,
+    value: T,
+    label?: string,
+    readonly?: boolean
+  }): Prop<T> {
+    let prop = new Prop<T>(options.name, options.value as T)
+    prop.label = options.label
+    prop.readonly = options.readonly || false
     return prop
   }
 }
