@@ -24,7 +24,7 @@
       :resizable="!control.fixed"
       drag-handle=".titlebar .drag"
       @dragstop="onDragStop"
-      @resizestop="onResize"
+      @resizestop="onResizeStop"
       @activated="onActivated(control)"
       :class-name="control.fixed ? 'fixed': 'draggable'"
       :grid=[10,10]
@@ -39,7 +39,7 @@
           @inspect="onControlInspect">
           </pa-control>
       </vue-draggable-resizable>
-      <div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
+      <!-- <div style="width:400px;height:200px;position:absolute;right:10px;top:10px">
         <pa-bar-chart
           :bar-width="20"
           :round="true"
@@ -66,7 +66,7 @@
               :position="[10, 10]"
               :style="{}"></pa-tooltip>
         </pa-bar-chart>
-      </div>
+      </div> -->
   </div>
 </template>
 
@@ -99,7 +99,6 @@ export default class Canvas extends Vue {
   zoom: number = 1
   plexes: any[] = []
   controls: Control[] = []
-  controlsSource: any[] = []
 
   get mocks () {
     return mocks
@@ -109,15 +108,30 @@ export default class Canvas extends Vue {
     return this.controls.find(c => c.uuid === this.selected)
   }
 
+  get selectedPlex () {
+    return this.plexes.find(c => c.uuid === this.selected)
+  }
+
   onDragStop (x: number, y: number) {
     api.canvas.savePlex(this.selected, {
-      position: {x, y}
+      position: {...this.selectedPlex.position, x, y}
     })
   }
 
-  onResize () {
-    this.selectedControl 
-      && this.selectedControl.repaint()
+  onResizeStop (
+    left: number, top: number,
+    width: number, height: number) {
+    if (this.selectedControl) {
+      this.selectedControl.repaint()
+      api.canvas.savePlex(this.selected, {
+        position: {
+          ...this.selectedPlex.position,
+          x: left,
+          y: top,
+        },
+        dimension: {width, height}
+      })
+    }
   }
 
   onActivated (control: Control) {
@@ -137,28 +151,12 @@ export default class Canvas extends Vue {
         this.controls = this.plexes.map(c => Control.create(c))
       })
     })
-    // this.controls = this.controlsSource.map(c => Control.create(c))
   }
 
   onControlInspect (uuid: string) {
     this.selected = uuid
     let c = this.plexes.find(c => c.uuid === uuid)
     console.log('Canvas.vue---------onControlInspect=====', c)
-    this.$http.post('/api/components', {
-      plexid: uuid,
-      name: c.component.name,
-      props: c.component.props
-    })
-    this.$http.post('/api/plexes', {
-      uuid: uuid,
-      fixed: c.fixed,
-      title: c.title,
-      position: c.position,
-      dimension: c.dimension
-    })
-    .then((res: any) => {
-      console.log('this.$http.get^^^^^^^^^^^^^', res)
-    })
   }
 
   inspect (control: Control) {
