@@ -53,9 +53,10 @@ export default {
 <style lang="stylus">
 .inspector
   header
-    height 24px
+    height 32px
+    background-color rgba(44, 44, 44, 0.5)
     h1
-      line-height 24px
+      line-height 32px
       font-size 14px
       padding 0 12px
   main
