@@ -5,7 +5,7 @@
     </header>
     <main>
       <pa-props
-        v-model="controlProps">
+        :value="controlProps">
       </pa-props>
     </main>
   </div>
@@ -23,23 +23,34 @@ export default {
   },
   data () {
     return {
-      uuid: this.value.uuid,
-      controlProps: this.value.controlProps,
-      chartProps: this.value.chartProps
+    }
+  },
+  computed: {
+    uuid () {
+      return this.value.uuid
+    },
+    controlProps () {
+      console.log('Inspector.vue-------------', this.value.controlProps)
+      return this.value.controlProps
+    },
+    chartProps () {
+      return this.value.chartProps
     }
   },
   watch: {
-    controlProps: {
-      handler (newVal, oldVal) {
-        this.$bus.emit('canvas', {
-          command: 'propsUpdated',
-          data: {
-            uuid: this.value.uuid,
-            props: newVal
-          }
-        })
-      }
-    }
+    // controlProps: {
+    //   handler (newVal, oldVal) {
+    //     console.log('Inspector.vue--------controlProps')
+    //     this.$bus.emit('canvas', {
+    //       command: 'propsUpdated',
+    //       data: {
+    //         uuid: this.value.uuid,
+    //         props: newVal
+    //       }
+    //     })
+    //   },
+    //   deep: true
+    // }
   },
   mounted () {
     console.log('Inspector.vue moundted', this.value,

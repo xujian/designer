@@ -122,6 +122,7 @@ export default class Canvas extends Vue {
   onControlInspect (uuid: string) {
     this.selected = uuid
     console.log('Canvas.vue---------onControlInspect=====', this.selectedControl)
+    this.inspect(this.selectedControl)
   }
 
   inspect (control: Control) {
@@ -163,10 +164,6 @@ export default class Canvas extends Vue {
   onSelectedChanged (newVal: string, oldVal: string) {
     if (!newVal) {
       this.aside(false)
-    } else {
-      let selectedControl = this.controls
-        .find(c => c.uuid === newVal)
-      selectedControl && this.inspect(selectedControl)
     }
   }
 

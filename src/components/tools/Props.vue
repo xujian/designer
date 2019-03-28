@@ -33,7 +33,17 @@ export default {
   data () {
     return {
       components: {},
-      props: []
+    }
+  },
+  computed: {
+    props () {
+      let props: any[] = []
+      this.value.forEach(p => {
+        let type = p.value.constructor.name
+        p.input = this.components[type]
+        props.push(p)
+      })
+      return props
     }
   },
   methods: {
@@ -47,14 +57,6 @@ export default {
       let name: string = filename.match(/([\w\-]+)\.vue$/)[1]
       this.components[name] = req(filename).default
     })
-    let props: any[] = []
-    this.value.forEach(p => {
-      let type = p.value.constructor.name
-      p.input = this.components[type]
-      props.push(p)
-    })
-    this.props = props
-    console.log('Props.vue<><', this.props)
   },
   components: {
   }
