@@ -1,12 +1,14 @@
 <template>
-  <div class="inspector-options">
-    <q-list class="items" v-if="value.length > 0">
+  <div class="inspector-props text-left">
+    <q-list class="items" v-if="props.length > 0">
       <q-item
-        v-for="(item, index) in value"
+        v-for="(item, index) in props"
         :key="index">
         <q-item-main>
-          <pa-prop-item
-            v-model="value[index]"></pa-prop-item>
+          <h6>{{item.label}}</h6>
+          <component
+          :is="item.input"
+          :value="item"></component>
         </q-item-main>
       </q-item>
     </q-list>
@@ -18,28 +20,43 @@
 </template>
 
 <script lang="ts">
-import PaPropItem from '@/components/tools/PropItem.vue'
 
 export default {
   name: 'PaProps',
   props: ['value'],
+  data () {
+    return {
+      components: {},
+      props: this.value
+    }
+  },
   methods: {
     onInputChange () {
     }
   },
   mounted () {
-    for (let v of this.value) {
-      console.log('PaOptions---', v)
-    }
+    const req = require.context('./props', true, /.vue$/)
+    req.keys().forEach(filename => {
+      let name: string = filename.match(/([\w\-]+)\.vue$/)[1]
+      this.components[name] = req(filename).default
+    })
+    this.props.forEach(p => {
+      let type = p.value.constructor.name
+      p.input = this.components[type]
+    })
+    console.log('Props.vue<><', this.props)
   },
   components: {
-    PaPropItem
   }
 }
 </script>
 
 <style lang="stylus">
-.inspector-options
+.inspector-props
+  h6
+    font-size 12px
+    &.info
+      color #999
   .empty
     color #999
     h3

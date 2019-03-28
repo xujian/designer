@@ -1,6 +1,7 @@
 import Prop from '@/core/models/Prop'
 import PropTypes from '../../core/models/PropTypes'
 import 'reflect-metadata'
+
 export const INSPECTABLE_FIELD_NAME = '__inspectable__'
 export const INSPECTABLE_METHOD_NAME = 'getInspectableProps'
 /**
@@ -39,7 +40,6 @@ export default function Inspectable (options: {
         }
       })
     }
-    console.log('Inspectable.ts()())()()()()())(()(', options)
     let inspected = {
       name: propertyKey,
       ...options
