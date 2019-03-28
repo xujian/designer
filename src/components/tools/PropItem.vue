@@ -6,14 +6,19 @@
       :value="value.value"
       @input="emitChange"></q-input>
   </div>
+  <div v-else-if="typeIs('Dimension')" class="prop-item">
+    <h6 class="info text-center">Dimension</h6>
+    <p class="text-center">{{value.label}}</p>
+  </div>
   <div v-else class="prop-item">
     <h6 class="info text-center">类型错误</h6>
-    <p class="text-center">{{value.type}}</p>
+    <p class="text-center">{{value.label}}</p>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import 'reflect-metadata'
 import { Component, Prop as PropDecorator } from 'vue-property-decorator'
 import Prop from '@/core/models/Prop'
 
@@ -28,15 +33,13 @@ export default class PropItem extends Vue {
 
   mounted () {
     console.log('PropItem.vue valueXCXCXCXCXCXCXCXC/////////////',
-      this.value,
-      Reflect.getMetadata('type', this, 'value'))
+      this.value, '<>><><><><',
+      Reflect.getMetadata('proptype', this.value),
+      Reflect.getMetadata('design:type', this, 'value'))
   }
 
   typeIs (name: string): boolean {
-    console.log('typeIs()',
-      this.prop.value.constructor.name, 
-      Reflect.getMetadata('type', this, 'prop'))
-    return this.value.type === name
+    return this.prop.value.constructor.name === name
   }
 
   emitChange (val: any) {

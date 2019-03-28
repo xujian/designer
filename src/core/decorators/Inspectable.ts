@@ -1,4 +1,5 @@
 import Prop from '@/core/models/Prop'
+import PropTypes from '../../core/models/PropTypes'
 import 'reflect-metadata'
 export const INSPECTABLE_FIELD_NAME = '__inspectable__'
 export const INSPECTABLE_METHOD_NAME = 'getInspectableProps'
@@ -7,7 +8,8 @@ export const INSPECTABLE_METHOD_NAME = 'getInspectableProps'
  */
 export default function Inspectable (options: {
   label: string,
-  readonly?: boolean
+  readonly?: boolean,
+  type?: any
 }) {
   return (
     target: object,
@@ -24,21 +26,15 @@ export default function Inspectable (options: {
           let control = this as any
           let props = control[INSPECTABLE_FIELD_NAME]
           return props.map((p: any) => {
-            let originalProp = control[p.name]
-            console.log('Inspectable.ts-----()())()()()()())(()(', originalProp)
-            if (originalProp.constructor.name === Prop.name) {
-              console.log(')))))))))))) is Prop')
-              return originalProp
-            } else {
-              console.log(')))))))))))) is NOT Prop')
-              let prop = Prop.create({
-                name: propertyKey,
-                value: control[p.name],
-                label: p.label,
-                readonly: p.readonly
-              })
-              return prop
-            }
+            let value = control[p.name]
+            let prop = new Prop({
+              name: propertyKey,
+              value: value,
+              label: p.label,
+              readonly: p.readonly,
+              type: p.type
+            })
+            return prop
           })
         }
       })
@@ -48,7 +44,8 @@ export default function Inspectable (options: {
       name: propertyKey,
       ...options
     }
-    Reflect.defineMetadata('type', Prop, inspected)
+    Reflect.defineMetadata('proptype',
+      PropTypes.Dimension, inspected)
     prototype[INSPECTABLE_FIELD_NAME].push(inspected)
   }
 }

@@ -42,7 +42,8 @@ export default {
     }
   },
   mounted () {
-    console.log('Inspector.vue moundted', this.value)
+    console.log('Inspector.vue moundted', this.value,
+    this.value.constructor.name)
   },
   components: {
     PaProps

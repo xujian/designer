@@ -63,26 +63,20 @@ export default class Control {
 
   @Inspectable({
     label: '位置',
-    readonly: true
+    readonly: true,
+    type: PropTypes.Position
   })
-  public position: Prop<PropTypes.Position> | undefined
+  public position: {} | undefined
 
   @Inspectable({
     label: '尺寸',
-    readonly: true
+    readonly: true,
+    type: PropTypes.Dimension
   })
-  public dimension: Prop<PropTypes.Dimension> | undefined
+  public dimension: {} | undefined
 
   constructor () {
     this.title = 'Untitled'
-  }
-
-  applyProps (props: Prop[]): void {
-    props.forEach(p => {
-      if (p.name === 'title') {
-        this.title = p.value
-      }
-    })
   }
 
   repaint () {
@@ -115,17 +109,7 @@ export default class Control {
     fixed?: boolean
   }): Control {
     let control = new Control()
-    control.uuid = input.uuid || utils.uuid()
-    control.title = input.title || 'Untitled'
-    control.type = input.type ||ControlTypes.EMPTY
-    control.position = new Prop<PropTypes.Position>(
-      'position', input.position
-    )
-    control.dimension = new Prop<PropTypes.Dimension>(
-        'dimension', input.dimension,
-      )
-    control.fixed = input.fixed || false
-    console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxControls.ts-------make component', input.component)
+    Object.assign(control, input)
     if (input.component) {
       let component = ChartFactory.make(
         input.component.name,

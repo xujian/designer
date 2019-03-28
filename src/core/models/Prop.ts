@@ -1,39 +1,30 @@
 import PropDefs from './PropDefs'
+import PropTypes from './PropTypes';
 /**
  * Base for Prop of Control other Classes
  */
-export default class Prop<T = string> {
-  name: string
+export default class Prop<T extends PropTypes.PropValueType> {
+  name: string = ''
   label: string | undefined
-  /**
-   * 只读
-   */
   readonly: boolean = false
-
+  type: any = String
   private __value: T | null = null
 
   get value (): T | null {
-    return this.__value as T
+    console.log('Prop.ts get value*********,,,,,,,', this.type)
+    return this.type ? new this.type(this.__value) : this.__value
   }
 
   set value (v: T | null) {
-    this.__value = v
+    this.__value = v as T
   }
 
-  constructor (name: string, value: T) {
-    this.name = name
-    this.__value = <T>value
-  }
-
-  static create<T> (options: {
+  constructor (input: {
     name: string,
     value: T,
     label?: string,
     readonly?: boolean
-  }): Prop<T> {
-    let prop = new Prop<T>(options.name, options.value)
-    prop.label = options.label
-    prop.readonly = options.readonly || false
-    return prop
+  }) {
+    Object.assign(this, input)
   }
 }
