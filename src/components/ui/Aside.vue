@@ -35,6 +35,7 @@ export default {
       return null
     },
     contentData () {
+      console.log('Aside.vue--------contentData------', this.data)
       return this.data
     }
   },
