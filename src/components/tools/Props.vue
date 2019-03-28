@@ -5,10 +5,16 @@
         v-for="(item, index) in props"
         :key="index">
         <q-item-main>
-          <h6>{{item.label}}</h6>
-          <component
-          :is="item.input"
-          :value="item"></component>
+          <div class="prop-item" v-if="item.input">
+            <h6>{{item.label}}</h6>
+            <component
+            :is="item.input"
+            :value="item"></component>
+          </div>
+          <div v-else class="prop-item-na">
+            <h6>{{item.label}}</h6>
+            <p>尚未实现</p>
+          </div>
         </q-item-main>
       </q-item>
     </q-list>
@@ -27,7 +33,7 @@ export default {
   data () {
     return {
       components: {},
-      props: this.value
+      props: []
     }
   },
   methods: {
@@ -35,15 +41,19 @@ export default {
     }
   },
   mounted () {
+    console.log('Props.vue<><', this.props)
     const req = require.context('./props', true, /.vue$/)
     req.keys().forEach(filename => {
       let name: string = filename.match(/([\w\-]+)\.vue$/)[1]
       this.components[name] = req(filename).default
     })
-    this.props.forEach(p => {
+    let props: any[] = []
+    this.value.forEach(p => {
       let type = p.value.constructor.name
       p.input = this.components[type]
+      props.push(p)
     })
+    this.props = props
     console.log('Props.vue<><', this.props)
   },
   components: {
