@@ -11,8 +11,9 @@ export default class Prop<T extends PropTypes.PropValueType> {
   private __value: T | null = null
 
   get value (): T | null {
-    console.log('Prop.ts get value*********,,,,,,,', this.type)
-    return this.type ? new this.type(this.__value) : this.__value
+    return this.type
+      ? new this.type(this.__value)
+      : this.__value
   }
 
   set value (v: T | null) {
