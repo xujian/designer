@@ -1,14 +1,23 @@
-const PropDefs = Object.freeze({
-  position: {
-    name: 'position',
-    type: 'number-pair',
-    label: '位置'
+/**
+ * 包含对指定组件的属性定义
+ */
+const charts = [
+  {
+    name: 'round',
+    options: {
+      type: Boolean,
+      label: '圆角柱条'
+    }
   },
-  dimention: {
-    name: 'dimension',
-    type: 'number-pair',
-    label: '尺寸'
+  {
+    name: 'barGap',
+    options: {
+      type: Number,
+      label: '柱条间距'
+    }
   }
-})
+] 
 
-export default PropDefs
+export default {
+  charts
+}
