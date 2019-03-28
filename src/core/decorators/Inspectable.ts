@@ -29,7 +29,7 @@ export default function Inspectable (options: {
           return props.map((p: any) => {
             let value = control[p.name]
             let prop = new Prop({
-              name: propertyKey,
+              name: p.name,
               value: value,
               label: p.label,
               readonly: p.readonly,
