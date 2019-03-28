@@ -146,6 +146,7 @@ export default class Canvas extends Vue {
       this.changeCanvasSize(payload.data)
     }
     if (payload.command === 'propsUpdated') {
+      console.log('Canvas.vue---------$on-----propsUpdated', payload)
       this.processProps(payload.data)
     }
   }
@@ -153,7 +154,9 @@ export default class Canvas extends Vue {
   processProps (data: any) {
     let controlToUpdate = this.controls
       .find(c => c.uuid === data.uuid)
-    controlToUpdate && controlToUpdate.applyProps(data.props)
+    if (controlToUpdate) {
+      controlToUpdate.applyProps(data.props)
+    }
   }
 
   onBoardClick ($event: any) {

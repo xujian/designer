@@ -79,6 +79,17 @@ export default class Control {
     this.title = 'Untitled'
   }
 
+  applyProps(props: any[]) {
+    console.log('Control.ts-----------applyProp---', props, this.props)
+    props.forEach(prop => {
+      this.props.forEach(x => {
+        if (prop.name === x.name) {
+          Reflect.set(this, x.name, prop.value)
+        }
+      })
+    })
+  }
+
   repaint () {
     this.component.repaint()
   }

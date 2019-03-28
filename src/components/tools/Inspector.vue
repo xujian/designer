@@ -5,7 +5,8 @@
     </header>
     <main>
       <pa-props
-        :value="controlProps">
+        :value="controlProps"
+        @change="onPropsChange">
       </pa-props>
     </main>
   </div>
@@ -30,7 +31,6 @@ export default {
       return this.value.uuid
     },
     controlProps () {
-      console.log('Inspector.vue-------------', this.value.controlProps)
       return this.value.controlProps
     },
     chartProps () {
@@ -38,23 +38,21 @@ export default {
     }
   },
   watch: {
-    // controlProps: {
-    //   handler (newVal, oldVal) {
-    //     console.log('Inspector.vue--------controlProps')
-    //     this.$bus.emit('canvas', {
-    //       command: 'propsUpdated',
-    //       data: {
-    //         uuid: this.value.uuid,
-    //         props: newVal
-    //       }
-    //     })
-    //   },
-    //   deep: true
-    // }
   },
   mounted () {
     console.log('Inspector.vue moundted', this.value,
     this.value.constructor.name)
+  },
+  methods: {
+    onPropsChange (props) {
+      this.$bus.emit('canvas', {
+        command: 'propsUpdated',
+        data: {
+          uuid: this.value.uuid,
+          props: props
+        }
+      })
+    }
   },
   components: {
     PaProps

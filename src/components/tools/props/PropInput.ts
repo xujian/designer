@@ -13,7 +13,7 @@ export default class PropInput extends Vue {
     return this.value
   }
 
-  emitChange (payload: any) {
-    this.$emit('change', payload)
+  emitChange (data: any) {
+    this.$emit('change', data)
   }
 }

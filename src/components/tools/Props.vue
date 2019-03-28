@@ -2,17 +2,17 @@
   <div class="inspector-props text-left">
     <q-list class="items" v-if="props.length > 0">
       <q-item
-        v-for="(item, index) in props"
+        v-for="(prop, index) in props"
         :key="index">
         <q-item-main>
-          <div class="prop-item" v-if="item.input">
-            <h6>{{item.label}}</h6>
+          <div class="prop-item" v-if="prop.input">
             <component
-            :is="item.input"
-            :value="item"></component>
+            :is="prop.input"
+            :value="prop"
+            @change="onPropChange(index, $event)"></component>
           </div>
           <div v-else class="prop-item-na">
-            <h6>{{item.label}}</h6>
+            <h6>{{prop.label}}</h6>
             <p>尚未实现</p>
           </div>
         </q-item-main>
@@ -47,7 +47,8 @@ export default {
     }
   },
   methods: {
-    onInputChange () {
+    onPropChange (propIndex: number, prop: any) {
+      this.$emit('change', [prop])
     }
   },
   mounted () {

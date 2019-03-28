@@ -3,7 +3,7 @@
     dark
     :float-label="prop.label"
     :value="prop.value"
-    @input="emitChange"></q-input>
+    @input="onInput"></q-input>
 </template>
 
 <script lang="ts">
@@ -14,7 +14,12 @@ import { Component, Prop as PropDecorator } from 'vue-property-decorator'
   name: 'PaString'
 })
 export default class PaString extends PropInput {
-
+  onInput (value: string) {
+    this.emitChange({
+      ...this.prop,
+      value
+    })
+  }
 }
 </script>
 
