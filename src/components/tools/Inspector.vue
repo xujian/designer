@@ -8,6 +8,10 @@
         :value="controlProps"
         @change="onPropsChange">
       </pa-props>
+      <pa-props
+        :value="chartProps"
+        @change="onPropsChange">
+      </pa-props>
     </main>
   </div>
 </template>

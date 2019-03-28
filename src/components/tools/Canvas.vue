@@ -130,7 +130,7 @@ export default class Canvas extends Vue {
       // 打开右侧栏
       uuid: this.selected,
       controlProps: this.selectedControl.props,
-      chartProps: []
+      chartProps: this.selectedControl.component.getInspectableProps()
     })
   }
 
