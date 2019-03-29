@@ -1,9 +1,11 @@
 <template>
   <div class="prop-item-boolean">
-    <q-checkbox
+    <q-toggle
+      dark
+      color="secondary"
       :label="prop.label"
-      :value="prop.value"
-      @input="onInput"></q-checkbox>
+      :value="prop.__value"
+      @input="onInput"></q-toggle>
     </div>
 </template>
 
@@ -16,10 +18,15 @@ import { Component, Prop as PropDecorator } from 'vue-property-decorator'
 })
 export default class PaString extends PropInput {
   onInput (value: string) {
+    console.log('Boolean.vue ------onInputXXXXXXXXXXX', value)
     this.emitChange({
       ...this.prop,
       value
     })
+  }
+
+  mounted () {
+    console.log('Boolean.vue------------mounted', this.prop)
   }
 }
 </script>

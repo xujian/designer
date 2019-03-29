@@ -9,15 +9,19 @@ import Prop from '../../../core/models/Prop'
 })
 export default class PropInput extends Vue {
   
-  private __prop = this.value
+  private __prop: any
 
   get prop () {
-    return this.value
+    return this.__prop
   }
 
   set prop (v) {
     console.log('PropInput<><>><><><><><><><>',)
     this.__prop = v
+  }
+
+  created () {
+    this.__prop = this.value
   }
 
   emitChange (data: any) {

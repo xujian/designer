@@ -23,6 +23,27 @@ const charts = [
       type: Number,
       label: '柱条宽度'
     }
+  },
+  {
+    name: 'lineWidth',
+    options: {
+      type: Number,
+      label: '线型宽度'
+    }
+  },
+  {
+    name: 'stack',
+    options: {
+      type: Boolean,
+      label: '堆叠'
+    }
+  },
+  {
+    name: 'smooth',
+    options: {
+      type: Boolean,
+      label: '平滑曲线'
+    }
   }
 ] 
 
