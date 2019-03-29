@@ -12,7 +12,7 @@ export default class PropInput extends Vue {
   private __prop: any
 
   get prop () {
-    return this.__prop
+    return this.__prop = this.value
   }
 
   set prop (v) {

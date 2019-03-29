@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import PropInput from './PropInput'
-import { Component, Prop as PropDecorator } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 
 @Component({
   name: 'PaPosition'
