@@ -27,6 +27,17 @@ namespace PropTypes {
       this.z = input.z
     }
   }
+
+  export class Percent extends PropValueType {
+    number: number | string
+    constructor (number: number | string) {
+      super()
+      if (typeof number === 'string') {
+        number = parseInt(number, 10)
+      }
+      this.number = number
+    }
+  }
 }
 
 export default PropTypes

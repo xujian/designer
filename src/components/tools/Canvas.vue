@@ -126,11 +126,17 @@ export default class Canvas extends Vue {
   }
 
   inspect (control: Control) {
+    let selected = this.selectedControl
+    let component = selected.component
+    let chartProps = component
+      && component.getInspectableProps
+      && component.getInspectableProps()
+      || []
     this.aside('inspector', {
       // 打开右侧栏
       uuid: this.selected,
-      controlProps: this.selectedControl.props,
-      chartProps: this.selectedControl.component.getInspectableProps()
+      controlProps: selected.props,
+      chartProps
     })
   }
 

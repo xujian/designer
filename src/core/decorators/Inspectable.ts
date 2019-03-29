@@ -18,12 +18,18 @@ function setInspectableForTarget (
 ) {
   // 给 target 内部设置一个 inspectable 队列
   let prototype = target as any
+  console.log(
+    '...setInspectableForTarget******',
+    target,
+    target[INSPECTABLE_FIELD_NAME]
+  )
   if (!target.hasOwnProperty(INSPECTABLE_FIELD_NAME)) {
+    console.log('......Inspectable.set: no set yet******', target)
     Reflect.defineProperty(target, INSPECTABLE_FIELD_NAME, {
       value: []
     })
     Reflect.defineProperty(target, INSPECTABLE_METHOD_NAME, {
-      value: function () {
+      value: function() {
         let control = this as any
         let props = control[INSPECTABLE_FIELD_NAME]
         return props.map((p: any) => {
@@ -44,9 +50,9 @@ function setInspectableForTarget (
     name: prop,
     ...options
   }
-  Reflect.defineMetadata('proptype',
-    PropTypes.Dimension, inspected)
-  prototype[INSPECTABLE_FIELD_NAME].push(inspected)
+  // Reflect.defineMetadata('proptype',
+  //   PropTypes.Dimension, inspected)
+  target[INSPECTABLE_FIELD_NAME].push(inspected)
 }
 
 /**
@@ -69,6 +75,7 @@ function Inspectable (options: {
  * 为 PaChart 设置 inspectable 属性
  */
 Inspectable.set = (component: PaChart) => {
+  console.log('Inspectable.set: component******', component)
   let props = component.props
   // 读取对于特定PaChart的属性定义
   Object.keys(props).forEach(prop => {

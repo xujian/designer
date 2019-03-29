@@ -33,21 +33,15 @@ export default {
   data () {
     return {
       components: {},
+      props: []
     }
   },
   computed: {
-    props () {
-      let props: any[] = []
-      this.value.forEach(p => {
-        let type = p.value.constructor.name
-        p.input = this.components[type]
-        props.push(p)
-      })
-      return props
-    }
   },
   methods: {
     onPropChange (propIndex: number, prop: any) {
+      // 更新本地数据并向上通知
+      this.props[propIndex].value = prop.value
       this.$emit('change', [prop])
     }
   },
@@ -57,6 +51,11 @@ export default {
     req.keys().forEach(filename => {
       let name: string = filename.match(/([\w\-]+)\.vue$/)[1]
       this.components[name] = req(filename).default
+    })
+    this.props = this.value.map(p => {
+      let type = p.value.constructor.name
+      p.input = this.components[type]
+      return p
     })
   },
   components: {
