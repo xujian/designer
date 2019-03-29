@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 
 export default {
   name: 'PaProps',
@@ -36,27 +36,35 @@ export default {
       props: []
     }
   },
-  computed: {
+  watch: {
+    value: {
+      handler () {
+        this.updateProps()
+      }
+    }
   },
   methods: {
-    onPropChange (propIndex: number, prop: any) {
+    onPropChange (propIndex, prop) {
       // 更新本地数据并向上通知
       this.props[propIndex].value = prop.value
       this.$emit('change', [prop])
+    },
+    updateProps () {
+      this.props = this.value.map(p => {
+        let type = p.value.constructor.name
+        p.input = this.components[type]
+        return p
+      })
     }
   },
   mounted () {
     console.log('Props.vue<><', this.props)
     const req = require.context('./props', true, /.vue$/)
     req.keys().forEach(filename => {
-      let name: string = filename.match(/([\w\-]+)\.vue$/)[1]
+      let name = filename.match(/([\w\-]+)\.vue$/)[1]
       this.components[name] = req(filename).default
     })
-    this.props = this.value.map(p => {
-      let type = p.value.constructor.name
-      p.input = this.components[type]
-      return p
-    })
+    this.updateProps()
   },
   components: {
   }
