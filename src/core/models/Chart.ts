@@ -8,7 +8,7 @@ export default class Chart {
   /**
    * 控件属性
    */
-  props: Prop[]
+  props: Prop<any>[]
 
   name: string
 

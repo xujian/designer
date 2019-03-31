@@ -24,7 +24,8 @@ export default class Prop<T extends PropTypes.PropValueType> {
     name: string,
     value: T,
     label?: string,
-    readonly?: boolean
+    readonly?: boolean,
+    type?: string
   }) {
     Object.assign(this, input)
   }

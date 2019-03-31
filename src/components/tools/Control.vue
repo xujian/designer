@@ -62,7 +62,7 @@ class PaControl extends Vue {
   mounted () {
     /** 插入component(图表) */
     if (this.component) {
-      this.component.$mount(this.$refs.component)
+      (this.component as any).$mount(this.$refs.component)
     }
   }
 }

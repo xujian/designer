@@ -122,11 +122,14 @@ export default class Canvas extends Vue {
   onControlInspect (uuid: string) {
     this.selected = uuid
     console.log('Canvas.vue---------onControlInspect=====', this.selectedControl)
-    this.inspect(this.selectedControl)
+    if (this.selectedControl) {
+      this.inspect(this.selectedControl)
+    }
   }
 
   inspect (control: Control) {
     let selected = this.selectedControl
+    if (!selected) return
     let component = selected.component
     let chartProps = component
       && component.getInspectableProps

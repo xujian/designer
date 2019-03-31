@@ -7,9 +7,9 @@ export default class Stencil {
   /**
    * 控件属性
    */
-  props: Prop[]
+  props: Prop<any>[]
 
-  constructor(props: Prop[]) {
+  constructor(props: Prop<any>[]) {
     this.props = props
   }
 }

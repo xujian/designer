@@ -12,7 +12,7 @@ export default class PropInput extends Vue {
   private __prop: any
 
   get prop () {
-    return this.__prop = this.value
+    return this.__prop = Reflect.get(this, 'value')
   }
 
   set prop (v) {
@@ -21,7 +21,7 @@ export default class PropInput extends Vue {
   }
 
   created () {
-    this.__prop = this.value
+    this.__prop = Reflect.get(this, 'value')
   }
 
   emitChange (data: any) {

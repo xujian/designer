@@ -1,18 +1,19 @@
 <template>
   <div class="chart-palette palette row">
-    <q-btn-dropdown icon="icon-chart-bar" split>
-      <q-list link class="palette-popover">
-        <q-item>
-          <q-item-side>
-            <q-icon name="icon-chart-bar-horizon"></q-icon>
-          </q-item-side>
-          <q-item-main>横向柱状图</q-item-main>
+    <q-btn-dropdown :icon="category.icon" split
+      v-for="(category, i1) in categories" :key="i1">
+      <q-list link class="palette-popover row gutter-none">
+        <q-item class="posit col-3"
+          v-for="(def, i2) in category.presets" :key="i2">
+          <div class="pick">
+            <div class="image flex justify-center">
+              <q-icon :name="def.icon"></q-icon>
+            </div>
+            <h6>{{def.title}}</h6>
+          </div>
         </q-item>
       </q-list>
     </q-btn-dropdown>
-    <q-btn
-      icon="icon-chart-line"></q-btn>
-    <q-btn icon="icon-chart-pie"></q-btn>
   </div>
 </template>
 
@@ -22,7 +23,74 @@ export default {
   name: 'PaChartPalette',
   data () {
     return {
-      chartDefs: []
+      categories: [
+        {
+          tilte: '柱图',
+          icon: 'icon-chart-bar',
+          presets: [
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            }
+          ]
+        },
+        {
+          tilte: '线图',
+          icon: 'icon-chart-line',
+          presets: [
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-pie'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            }
+          ]
+        },
+        {
+          tilte: '饼图',
+          icon: 'icon-chart-pie',
+          presets: [
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-pie'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            },
+            {
+              title: '横向柱状图',
+              icon: 'icon-chart-bar-horizon'
+            }
+          ]
+        }
+      ]
     }
   },
   mounted () {
@@ -48,6 +116,26 @@ export default {
     height: 24px;
 .palette-popover
   color #fff
+  width 400px
+  padding 0 !important
+  .posit
+    padding 0
+    text-align center
+    .pick
+      width: 100px
+      text-align  center
+      height 100px
+      position relative
+      .image
+        width 100%
+        height 100%
+      h6
+        font-size 12px
+        font-weight 100
+        width 100%
+        line-height  32px
+        position absolute
+        bottom  0
   .q-btn-dropdown-arrow
     width 24px
     background-color rgba(255,255,255,0.2)

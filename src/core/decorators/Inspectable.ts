@@ -21,7 +21,7 @@ function setInspectableForTarget (
   console.log(
     '...setInspectableForTarget******',
     target,
-    target[INSPECTABLE_FIELD_NAME]
+    Reflect.get(target, INSPECTABLE_FIELD_NAME)
   )
   if (!target.hasOwnProperty(INSPECTABLE_FIELD_NAME)) {
     console.log('......Inspectable.set: no set yet******', target)
@@ -52,7 +52,9 @@ function setInspectableForTarget (
   }
   // Reflect.defineMetadata('proptype',
   //   PropTypes.Dimension, inspected)
-  target[INSPECTABLE_FIELD_NAME].push(inspected)
+  let insp = Reflect.get(target, INSPECTABLE_FIELD_NAME)
+  insp.push(inspected)
+  Reflect.set(target, INSPECTABLE_FIELD_NAME, insp)
 }
 
 /**
