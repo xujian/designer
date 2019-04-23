@@ -199,4 +199,7 @@ export default class Canvas extends Vue {
     color #fff
   .anchorBL
     display none
+  .chart-container
+    width 100%
+    height 100%
 </style>
