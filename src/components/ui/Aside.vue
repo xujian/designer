@@ -11,8 +11,9 @@
 </template>
 
 <script>
-import PaInspector from '@/components/tools/Inspector'
-
+// import PaInspector from '@/components/tools/Inspector'
+import { Inspector as PaInspector } from 'vue-chartlib/support'
+console.log('Aside.vue------------------', PaInspector)
 export default {
   name: 'PaAside',
   props: {

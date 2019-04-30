@@ -1,8 +1,6 @@
-import Prop from './Prop'
-import PropTypes from './PropTypes'
 import Chart from './Chart'
 import Stencil from './Stencil'
-import Inspectable from '@/core/decorators/Inspectable'
+import { Inspectable, Prop, PropTypes } from 'vue-chartlib/support'
 import utils from '@/core/utils'
 import { PaChart, ChartFactory } from 'vue-chartlib'
 

@@ -42,7 +42,7 @@ import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
 import Control, { ControlTypes } from '@/core/models/Control'
-import Prop from '@/core/models/Prop'
+import { Prop } from 'vue-chartlib/support'
 import utils from '@/core/utils'
 import Chart from '@/core/models/Chart'
 import { mocks } from 'vue-chartlib'
@@ -135,6 +135,7 @@ export default class Canvas extends Vue {
       && component.getInspectableProps
       && component.getInspectableProps()
       || []
+    console.log('Canvas.vue______________inspect___chartProps', chartProps)
     this.aside('inspector', {
       // 打开右侧栏
       uuid: this.selected,
