@@ -49,7 +49,8 @@ export default class Control {
    * 控件上显示的名称
    */
   @Inspectable({
-    label: '标题'
+    label: '控件标题',
+    type: String
   })
   public title: string = '(无标题)'
   /**
