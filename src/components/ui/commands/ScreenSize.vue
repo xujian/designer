@@ -4,7 +4,7 @@
       <q-icon name="crop_landscape" size="24px"></q-icon>
       <span>{{width}}</span>X<span>{{height}}</span>
     </div>
-    <q-popover class="screensize-popover" v-model="isPanelActive">
+    <!-- <q-popover class="screensize-popover" v-model="isPanelActive">
       <q-input hide-underline dark
       float-label="宽度"
       v-model="width"
@@ -18,7 +18,7 @@
       maxlength="5"
       autocomplete="off"></q-input>
       <q-btn @click="save" dark>保存</q-btn>
-    </q-popover>
+    </q-popover> -->
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <q-layout-header>
+  <q-header>
     <q-toolbar color="primary">
       <pa-title></pa-title>
       <pa-command-bar></pa-command-bar>
@@ -10,7 +10,7 @@
         <q-icon name="more_vert" />
       </q-btn>
     </q-toolbar>
-  </q-layout-header>
+  </q-header>
 </template>
 
 <script>

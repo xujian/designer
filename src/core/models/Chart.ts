@@ -1,4 +1,4 @@
-import Prop from './Prop'
+import { Prop } from 'vue-chartlib/support'
 import ChartLib, { PaChart, ChartFactory } from 'vue-chartlib'
 
 /**

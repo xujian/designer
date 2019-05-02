@@ -6,9 +6,9 @@
       aria-label="Menu">
       <q-icon name="menu" />
     </q-btn>
-    <q-collapsible
+    <!-- <q-collapsible
       class="title" label="Designer" sublabel="" height="48px">
-    </q-collapsible>
+    </q-collapsible> -->
   </div>
 </template>
 <script>

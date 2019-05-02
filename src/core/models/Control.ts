@@ -46,14 +46,6 @@ export default class Control {
   groups: number = 0
 
   /**
-   * 控件上显示的名称
-   */
-  @Inspectable({
-    label: '控件标题',
-    type: String
-  })
-  public title: string = '(无标题)'
-  /**
    * 控件类型
    */
   type: ControlTypes = ControlTypes.EMPTY
@@ -75,10 +67,10 @@ export default class Control {
   public dimension: {} | undefined
 
   constructor () {
-    this.title = 'Untitled'
+    // this.title = 'Untitled'
   }
 
-  applyProps(props: any[]) {
+  applyProps (props: any[]) {
     // console.log('Control.ts-----------applyProp---', props, this.props, this.component.props)
     props.forEach(prop => {
       this.props.forEach(x => {
@@ -143,7 +135,7 @@ export default class Control {
    * 控件的所有可配置属性
    * returan all inspectable properties
    */
-  get props(): Prop<any>[] {
+  get props (): Prop<any>[] {
     let __this = this as any
     let props = __this.getInspectableProps()
     return props

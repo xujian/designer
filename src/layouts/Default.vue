@@ -1,15 +1,15 @@
 <template>
-  <q-layout class="layout" view="lhr lpr lfr">
+  <q-layout class="layout" container view="lhr lpr lfr">
     <pa-header></pa-header>
-    <q-layout-drawer
+    <q-drawer
       side="left"
       :width="240"
       overlay
       v-model="leftDrawerOpen"
       :content-class="'nav'">
       <pa-nav></pa-nav>
-    </q-layout-drawer>
-    <q-layout-drawer
+    </q-drawer>
+    <q-drawer
       side="right"
       :width="320"
       overlay
@@ -19,11 +19,11 @@
         :component="asideComponent"
         :data="asideData"
       ></pa-aside>
-    </q-layout-drawer>
+    </q-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-layout-footer></q-layout-footer>
+    <q-footer></q-footer>
   </q-layout>
 </template>
 

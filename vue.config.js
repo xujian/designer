@@ -1,8 +1,7 @@
 module.exports = {
   pluginOptions: {
     quasar: {
-      theme: 'mat',
-      importAll: true
+      treeShake: true
     }
   },
   devServer: {
@@ -23,5 +22,7 @@ module.exports = {
       }
     }
   },
-  transpileDependencies: [/[\\\/]node_modules[\\\/]quasar-framework[\\\/]/]
+  transpileDependencies: [
+    /[\\\/]node_modules[\\\/]quasar[\\\/]/
+  ]
 }

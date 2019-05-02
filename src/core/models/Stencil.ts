@@ -9,7 +9,7 @@ export default class Stencil {
    */
   props: Prop<any>[]
 
-  constructor(props: Prop<any>[]) {
+  constructor (props: Prop<any>[]) {
     this.props = props
   }
 }
