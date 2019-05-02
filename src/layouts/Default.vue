@@ -90,6 +90,7 @@ export default {
 
 <style lang="stylus">
 .layout
+  height 100vh !important
   .nav // 左侧栏
     background-color #00796B
     color #fff

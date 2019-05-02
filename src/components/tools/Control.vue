@@ -1,23 +1,11 @@
 <template>
   <div class="control" :uuid="uuid">
-    <q-toolbar class="titlebar justify-end">
-      <q-btn-group>
-        <q-btn flat
-          class="button delete">
-          <q-icon name="close"></q-icon>
-        </q-btn>
-        <q-btn flat
-          class="button drag">
-          <q-icon name="drag_indicator"></q-icon>
-        </q-btn>
-        <q-btn flat
-          class="button settings" @click="$emit('inspect', uuid)">
-          <q-icon name="settings"></q-icon>
-        </q-btn>
-        <q-btn flat
-          class="button menu-button">
-          <q-icon name="arrow_right"></q-icon>
-        </q-btn>
+    <q-toolbar class="titlebar justify-end text-write">
+      <q-btn-group no-shadow>
+        <q-btn flat class="button delete" icon="close"></q-btn>
+        <q-btn flat class="button drag" icon="drag_indicator"></q-btn>
+        <q-btn flat class="button settings" @click="$emit('inspect', uuid)" icon="settings"></q-btn>
+        <q-btn flat class="button menu-button" icon="arrow_right"></q-btn>
       </q-btn-group>
     </q-toolbar>
     <h1 class="title">{{title}}</h1>
@@ -99,6 +87,10 @@ export default PaControl
     transition all 0.5s
     .button
       width 24px
+      color #fff
+      min-height 24px
+      .q-icon
+        font-size 16px
   &:hover
     .titlebar
       transform translateY(0px)
