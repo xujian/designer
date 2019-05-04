@@ -1,5 +1,5 @@
 <template>
-  <q-layout class="layout" container view="lhr lpr lfr">
+  <q-layout class="layout" container view="hhh lpR fFf">
     <pa-header></pa-header>
     <q-drawer
       side="left"
@@ -97,6 +97,6 @@ export default {
   .aside // 右侧栏
     background-color rgba(68, 68, 68, 0.5)
     color #fff
-.aside
-  background-color #333
+  .q-drawer
+    background-color transparent
 </style>

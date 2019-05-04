@@ -15,11 +15,13 @@ import {
   QBtnGroup,
   QBtnDropdown,
   QIcon,
+  QInput,
   QList,
   QItem,
   QItemSection,
   QItemLabel,
-  QScrollArea
+  QScrollArea,
+  QToggle
 } from 'quasar'
 
 const install = (Vue, options) => {
@@ -37,11 +39,13 @@ const install = (Vue, options) => {
       QBtnGroup,
       QBtn,
       QIcon,
+      QInput,
       QList,
       QItem,
       QItemSection,
       QItemLabel,
-      QScrollArea
+      QScrollArea,
+      QToggle
     },
     directives: {
     },

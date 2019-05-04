@@ -125,7 +125,7 @@ export default class Control {
         input.component.name,
         input.component.props,
         input.component.layers)
-      Inspectable.set(component)
+      // Inspectable.set(component)
       control.component = component
     }
     return control
