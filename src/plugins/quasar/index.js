@@ -20,8 +20,7 @@ import {
   QItem,
   QItemSection,
   QItemLabel,
-  QScrollArea,
-  QToggle
+  QScrollArea
 } from 'quasar'
 
 const install = (Vue, options) => {
@@ -44,8 +43,7 @@ const install = (Vue, options) => {
       QItem,
       QItemSection,
       QItemLabel,
-      QScrollArea,
-      QToggle
+      QScrollArea
     },
     directives: {
     },
