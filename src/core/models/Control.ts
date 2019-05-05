@@ -137,7 +137,7 @@ export default class Control {
    */
   get props (): Prop<any>[] {
     let __this = this as any
-    let props = __this.getInspectableProps()
+    let props = Inspectable.get(this) || []
     return props
   }
 }
