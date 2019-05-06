@@ -2,8 +2,6 @@
   <q-scroll-area
     class="aside full-height">
     <component
-      class="content"
-      ref="right"
       :is="contentComponent"
       v-model="contentData">
     </component>
@@ -11,9 +9,7 @@
 </template>
 
 <script>
-// import PaInspector from '@/components/tools/Inspector'
-import { Inspector as PaInspector } from 'vue-chartlib/support'
-console.log('Aside.vue------------------', PaInspector)
+let PaInspector = () => import('@/components/tools/Inspector')
 export default {
   name: 'PaAside',
   props: {
@@ -62,7 +58,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-
-</style>
