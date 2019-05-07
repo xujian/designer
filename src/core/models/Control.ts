@@ -71,7 +71,6 @@ export default class Control {
   }
 
   applyProps (props: any[]) {
-    // console.log('Control.ts-----------applyProp---', props, this.props, this.component.props)
     props.forEach(prop => {
       this.props.forEach(x => {
         if (prop.name === x.name) {
@@ -79,11 +78,13 @@ export default class Control {
         }
       })
       if (this.component) {
-        console.log('...Control.ts-----------applyProp---', this.component.props)
+        let component = this.component
         if (Object.keys(this.component.props).includes(prop.name)) {
-          console.log('......Control.ts-----------applyProp---', prop.name)
-          Reflect.set(this.component, prop.name, prop.value)
-          this.repaint()
+          let newValue = 
+            typeof prop.value === 'array' ?
+            prop.value :
+            [...prop.value]
+          component[prop.name] = newValue // force reactive
         }
       }
     })
