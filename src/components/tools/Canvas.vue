@@ -47,7 +47,7 @@ import utils from '@/core/utils'
 import Chart from '@/core/models/Chart'
 import { mocks } from 'vue-chartlib'
 import api from '../../api'
-import components from '@/api/components';
+import components from '@/api/components'
 
 
 @Component({
