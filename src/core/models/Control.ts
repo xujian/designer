@@ -81,10 +81,10 @@ export default class Control {
         let component = this.component
         if (Object.keys(this.component.props).includes(prop.name)) {
           let newValue = 
-            typeof prop.value === 'array' ?
-            prop.value :
-            [...prop.value]
-          component[prop.name] = newValue // force reactive
+            Array.isArray(prop.value) ?
+            [...prop.value] :
+            prop.value
+          Reflect.set(component, prop.name, newValue) // force reactive
         }
       }
     })
