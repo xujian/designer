@@ -65,15 +65,15 @@ export default PaControl
   width 100%
   height 100%
   overflow hidden
+  border: 1px solid rgba(0,0,0,0.33)
   .title
     font-size 12px
     padding: 0 6px
     line-height 24px
   &.selected
-    background-color #555
     border: 1px solid #009688
   &:hover
-    background-color #666
+    border: 1px solid #009688
   .titlebar
     height 24px
     font-size 12px
@@ -100,9 +100,6 @@ export default PaControl
     position absolute
     top 0
     left 0
-&.draggable
-  .control
-    border: 1px solid #ccc
 .map-control
   border: none
   position absolute
