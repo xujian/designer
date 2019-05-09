@@ -64,6 +64,7 @@ export default class Canvas extends Vue {
   canvasSize: number[] = [1920, 540]
   zoom: number = 1
   plexes: any[] = []
+  components: any[] = []
   controls: Control[] = []
 
   get mocks () {
@@ -110,7 +111,8 @@ export default class Canvas extends Vue {
       this.plexes = plexes
       const plexids = this.plexes.map(p => p.uuid)
       api.components.loadByPlex(plexids.join(',')).then(components => {
-        components.forEach((c: any) => {
+        this.components = components
+        this.components.forEach((c: any) => {
           let plex = this.plexes.find((pl: any) => pl.uuid === c.plexid)
           plex.component = c
         })
@@ -159,10 +161,20 @@ export default class Canvas extends Vue {
   }
 
   processProps (data: any) {
-    let controlToUpdate = this.controls
+    let control = this.controls
       .find(c => c.uuid === data.uuid)
-    if (controlToUpdate) {
-      controlToUpdate.applyProps(data.props)
+    if (control) {
+      control.applyProps(data.props)
+      let component = control.component
+      let props = component.props
+      let assignedProps: {[key: string]: any} = {}
+      Object.keys(props).forEach(p => {
+        if (props[p] !== undefined
+          && !['uuid', 'type', 'subType', '__data'].includes(p)) { // 直接给定的props
+          assignedProps[p] = props[p]
+        }
+      })
+      api.components.saveComponent(component.uuid, assignedProps)
     }
   }
 

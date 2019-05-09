@@ -10,7 +10,7 @@ function loadByPlex (plexid: string) {
 }
 
 function saveComponent (uuid: string, props: any) {
-  axios.post(`/api/components/${uuid}`, props)
+  axios.post(`/api/components/${uuid}`, { props })
     .then((res: any) => {
       console.log('api.saveComponent^^^^^^^^^^^^^', res)
     })

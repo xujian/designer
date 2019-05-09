@@ -2,7 +2,7 @@ import Chart from './Chart'
 import Stencil from './Stencil'
 import { Inspectable, Prop, PropTypes } from 'vue-chartlib/support'
 import utils from '@/core/utils'
-import { PaChart, ChartFactory } from 'vue-chartlib'
+import { ChartFactory } from 'vue-chartlib'
 
 /**
  * 不同行为和内容的控件
@@ -113,6 +113,7 @@ export default class Control {
       height: number | string
     },
     component?: {
+      uuid: string,
       name: string,
       props: any,
       layers?: any[]
@@ -122,12 +123,15 @@ export default class Control {
     let control = new Control()
     Object.assign(control, input)
     if (input.component) {
-      let component = ChartFactory.make(
-        input.component.name,
-        input.component.props,
-        input.component.layers)
+      let chart = ChartFactory.make({
+        uuid: input.component.uuid,
+        name: input.component.name, 
+        props: input.component.props,
+        layers: input.component.layers
+      })
       // Inspectable.set(component)
-      control.component = component
+      console.log('Control.ts_______________________create', chart)
+      control.component = chart
     }
     return control
   }
