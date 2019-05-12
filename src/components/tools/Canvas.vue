@@ -166,15 +166,17 @@ export default class Canvas extends Vue {
     if (control) {
       control.applyProps(data.props)
       let component = control.component
-      let props = component.props
-      let assignedProps: {[key: string]: any} = {}
-      Object.keys(props).forEach(p => {
-        if (props[p] !== undefined
-          && !['uuid', 'type', 'subType', '__data'].includes(p)) { // 直接给定的props
-          assignedProps[p] = props[p]
-        }
-      })
-      api.components.saveComponent(component.uuid, assignedProps)
+      if (component) {
+        let props = component.props
+        let assignedProps: {[key: string]: any} = {}
+        Object.keys(props).forEach(p => {
+          if (props[p] !== undefined
+            && !['uuid', 'type', 'subType', '__data'].includes(p)) { // 直接给定的props
+            assignedProps[p] = props[p]
+          }
+        })
+        // api.components.saveComponent(component.uuid, assignedProps)
+      }
     }
   }
 
