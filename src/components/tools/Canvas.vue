@@ -49,7 +49,6 @@ import { mocks } from 'vue-chartlib'
 import api from '../../api'
 import components from '@/api/components'
 
-
 @Component({
   components: {
     VueDraggableResizable,
