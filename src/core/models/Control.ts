@@ -80,8 +80,7 @@ export default class Control {
       if (this.component) {
         let component = this.component
         if (Object.keys(this.component.props).includes(prop.name)) {
-          let newValue = prop.valueOf()
-          Reflect.set(component, prop.name, newValue) // force reactive
+          Reflect.set(component, prop.name, prop.value) // force reactive
         }
       }
     })

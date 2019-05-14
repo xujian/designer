@@ -1,13 +1,8 @@
 <template>
   <div class="control-inspector">
-    <header>
-      <h6>属性</h6>
-    </header>
-    <main>
-      <pa-chartlib-inspector
-        v-model="mergedProps"
-        @change="onChange"></pa-chartlib-inspector>
-    </main>
+    <pa-chartlib-inspector
+      v-model="mergedProps"
+      @change="onChange"></pa-chartlib-inspector>
   </div>
 </template>
 
