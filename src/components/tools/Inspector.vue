@@ -13,7 +13,11 @@ export default {
   props: ['value'],
   computed: {
     mergedProps () {
-      return [...this.value.chartProps, ...this.value.controlProps]
+      return {
+        main: [...this.value.chartProps, ...this.value.controlProps],
+        layers: this.value.layersProps,
+        accessories: []
+      }
     }
   },
   methods: {

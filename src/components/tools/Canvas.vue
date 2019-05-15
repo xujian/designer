@@ -45,7 +45,7 @@ import Control, { ControlTypes } from '@/core/models/Control'
 import { Prop, Inspectable } from 'vue-chartlib/support'
 import utils from '@/core/utils'
 import Chart from '@/core/models/Chart'
-import { mocks } from 'vue-chartlib'
+import { mocks, PaChart } from 'vue-chartlib'
 import api from '../../api'
 import components from '@/api/components'
 
@@ -132,21 +132,35 @@ export default class Canvas extends Vue {
     let selected = this.selectedControl
     if (!selected) return
     let component = selected.component
-    let chartProps = Inspectable.get(component) || []
-    console.log('Canvas.vue______________inspect___chartProps', chartProps)
-    this.aside('inspector', {
-      // 打开右侧栏
-      uuid: this.selected,
-      controlProps: selected.props,
-      chartProps
-    })
+    if (component) {
+      let chartProps = Inspectable.get(component)
+      let layersProps: {
+        name: string,
+        props: Prop<any>[]
+      }[] = []
+      if (component.layers) {
+        component.layers.forEach(l => {
+          layersProps.push({
+            name: l.type,
+            props: Inspectable.get(l)
+          })
+        })
+        this.aside('inspector', {
+          // 打开右侧栏
+          uuid: this.selected,
+          controlProps: selected.props,
+          chartProps,
+          layersProps
+        })
+      }
+    }
   }
 
   initEvents () {
-    this.$bus.on('canvas', this.processCanvasCommands)
+    this.$bus.on('canvas', this.onCanvasCommands)
   }
 
-  processCanvasCommands (payload: {
+  onCanvasCommands (payload: {
     command: string,
     data: any
   }) {
