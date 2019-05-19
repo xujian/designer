@@ -1,7 +1,6 @@
 import Chart from './Chart'
 import Stencil from './Stencil'
 import { Inspectable, Prop, PropTypes } from 'vue-chartlib/support'
-import utils from '@/core/utils'
 import { ChartFactory } from 'vue-chartlib'
 
 /**
@@ -109,7 +108,7 @@ export default class Control {
       height: number | string
     },
     component?: {
-      uuid: string,
+      uuid?: string,
       name: string,
       props: any,
       layers?: any[]
@@ -125,7 +124,6 @@ export default class Control {
         props: input.component.props,
         layers: input.component.layers
       })
-      // Inspectable.set(component)
       console.log('Control.ts_______________________create', chart)
       control.component = chart
     }

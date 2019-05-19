@@ -5,6 +5,7 @@
       height: canvasSize[1] * zoom + 'px'
     }"
     @click.self="onBoardClick($event)">
+    
     <vue-draggable-resizable
       v-for="(control, i) in controls"
       :key="i"
@@ -79,9 +80,15 @@ export default class Canvas extends Vue {
   }
 
   onDragStop (x: number, y: number) {
+    // api.canvas.addPlex(this.selectedPlex)
     api.canvas.savePlex(this.selected, {
       position: {...this.selectedPlex.position, x, y}
     })
+    // api.components.add({
+    //   uuid: utils.uuid(),
+    //   plexid: this.selectedPlex.uuid,
+    //   props: this.selectedPlex.component.props
+    // })
   }
 
   onResizeStop (
@@ -188,7 +195,7 @@ export default class Canvas extends Vue {
             assignedProps[p] = props[p]
           }
         })
-        // api.components.saveComponent(component.uuid, assignedProps)
+        api.components.save(component.uuid, assignedProps)
       }
     }
   }
@@ -219,7 +226,7 @@ export default class Canvas extends Vue {
 <style lang="stylus">
 .board
   position relative
-  background: #444
+  background: #003335
   .drag
     color #fff
   .anchorBL

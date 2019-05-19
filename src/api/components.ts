@@ -9,7 +9,19 @@ function loadByPlex (plexid: string) {
   })
 }
 
-function saveComponent (uuid: string, props: any) {
+function add (component: any) {
+  axios.post(`/api/components`, {
+    uuid: component.uuid,
+    plexid: component.plexid,
+    name: component.constructor.name,
+    props: component.props
+   })
+  .then((res: any) => {
+    console.log('api.saveComponent^^^^^^^^^^^^^', res)
+  })
+}
+
+function save (uuid: string, props: any) {
   axios.post(`/api/components/${uuid}`, { props })
     .then((res: any) => {
       console.log('api.saveComponent^^^^^^^^^^^^^', res)
@@ -18,5 +30,6 @@ function saveComponent (uuid: string, props: any) {
 
 export default {
   loadByPlex,
-  saveComponent
+  save,
+  add
 }
