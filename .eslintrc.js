@@ -1,18 +1,23 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module' // Allows for the use of imports
   },
-  'extends': [
-    'plugin:vue/essential',
-    '@vue/standard',
-    '@vue/typescript'
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+  ],
+  plugins: [
+    '@typescript-eslint',
+    'prettier'
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  },
-  parserOptions: {
-    parser: '@typescript-eslint/parser'
+    'prettier/prettier': 0,
+    'space-before-function-paren': 'always',
+    '@typescript-eslint/explicit-member-accessibility': 0,
+    '@typescript-eslint/indent': 2,
+    '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/member-delimiter-style': 'off',
+    '@typescript-eslint/prefer-interface': 0
   }
 }

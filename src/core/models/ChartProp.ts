@@ -1,10 +1,10 @@
 export interface PropDimension {
-  width: number,
+  width: number
   height: number
 }
 
 export interface PropPosition {
-  x: number,
+  x: number
   y: number
 }
 
@@ -12,9 +12,9 @@ export interface PropPosition {
  * 图表属性
  */
 export interface ChartPropData {
-  name: string,
-  label: string,
-  type: any,
+  name: string
+  label: string
+  type: any
   value: PropDimension | PropPosition
 }
 
