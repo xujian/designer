@@ -13,7 +13,7 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 0,
-    'space-before-function-paren': 'always',
+    'space-before-function-paren': 2,
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/indent': 2,
     '@typescript-eslint/explicit-function-return-type': 0,
