@@ -1,4 +1,4 @@
-import Prop from './Prop'
+import { Prop } from 'vue-chartlib/support'
 
 /**
  * 图表

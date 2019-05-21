@@ -14,10 +14,10 @@ plugins.keys().forEach(p => {
   Vue.use(plugins(p))
 })
 
-Vue.use(<any>ChartLib, {
+Vue.use(ChartLib, {
   theme: 'dark'
 })
-Vue.use(<any>mixins)
+Vue.use(mixins)
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false

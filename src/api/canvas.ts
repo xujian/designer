@@ -9,22 +9,21 @@ async function loadPlexes (): Promise<any[]> {
 }
 
 function addPlex (props: any) {
-  axios.post(`/api/plexes`, {
+  axios.post('/api/plexes', {
     uuid: props.uuid,
     dimension: props.dimension,
     position: props.position,
     fixed: props.fixed
-  })
-  .then((res: any) => {
+  }).then((res: any) => {
     console.log('this.$http.post^^^^^^^^^^^^^', res)
   })
 }
 
 function savePlex (uuid: string, props: any) {
   axios.post(`/api/plexes/${uuid}`, props)
-  .then((res: any) => {
-    console.log('this.$http.get^^^^^^^^^^^^^', res)
-  })
+    .then((res: any) => {
+      console.log('this.$http.get^^^^^^^^^^^^^', res)
+    })
 }
 
 function deletePlex (uuid: string) {

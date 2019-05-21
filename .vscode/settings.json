@@ -17,5 +17,6 @@
       "language": "typescript",
       "autoFix": true
     }
-  ]
+  ],
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true
 }
