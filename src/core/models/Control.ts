@@ -26,7 +26,7 @@ export enum ControlTypes {
   /**
    * 没有内容的控件
    */
-  EMPTY = 'Empty'
+  EMPTY = 'Empty',
 }
 
 /**
@@ -54,14 +54,14 @@ export default class Control {
   @Inspectable({
     label: '位置',
     readonly: true,
-    type: PropTypes.Position
+    type: PropTypes.Position,
   })
   public position: {} | undefined
 
   @Inspectable({
     label: '尺寸',
     readonly: true,
-    type: PropTypes.Dimension
+    type: PropTypes.Dimension,
   })
   public dimension: {} | undefined
 
@@ -94,25 +94,25 @@ export default class Control {
    * @param input 输入参数
    */
   static create (input: {
-    uuid?: string,
-    title: string,
-    type?: ControlTypes,
-    props?: any,
+    uuid?: string
+    title: string
+    type?: ControlTypes
+    props?: any
     position: {
-      x: number,
-      y: number,
+      x: number
+      y: number
       z: number
-    },
+    }
     dimension: {
-      width: number | string,
+      width: number | string
       height: number | string
-    },
+    }
     component?: {
-      uuid?: string,
-      name: string,
-      props: any,
+      uuid?: string
+      name: string
+      props: any
       layers?: any[]
-    },
+    }
     fixed?: boolean
   }): Control {
     let control = new Control()
@@ -120,9 +120,9 @@ export default class Control {
     if (input.component) {
       let chart = ChartFactory.make({
         uuid: input.component.uuid,
-        name: input.component.name, 
+        name: input.component.name,
         props: input.component.props,
-        layers: input.component.layers
+        layers: input.component.layers,
       })
       console.log('Control.ts_______________________create', chart)
       control.component = chart
@@ -135,7 +135,6 @@ export default class Control {
    * returan all inspectable properties
    */
   get props (): Prop<any>[] {
-    let __this = this as any
     let props = Inspectable.get(this) || []
     return props
   }
