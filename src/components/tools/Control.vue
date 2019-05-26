@@ -2,10 +2,10 @@
   <div class="control" :uuid="uuid">
     <q-toolbar class="titlebar justify-end text-write">
       <q-btn-group no-shadow>
-        <q-btn flat class="button delete" icon="close"></q-btn>
-        <q-btn flat class="button drag" icon="drag_indicator"></q-btn>
-        <q-btn flat class="button settings" @click="$emit('inspect', uuid)" icon="settings"></q-btn>
-        <q-btn flat class="button menu-button" icon="arrow_right"></q-btn>
+        <q-btn flat class="button delete" icon="close" />
+        <q-btn flat class="button drag" icon="drag_indicator" />
+        <q-btn flat class="button settings" icon="settings" @click="$emit('inspect', uuid)" />
+        <q-btn flat class="button menu-button" icon="arrow_right" />
       </q-btn-group>
     </q-toolbar>
     <h1 class="title">{{title}}</h1>
