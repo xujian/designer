@@ -94,26 +94,26 @@ export default class Control {
    * @param input 输入参数
    */
   static create (input: {
-    uuid?: string
-    title: string
-    type?: ControlTypes
-    props?: any
+    uuid?: string,
+    title: string,
+    type?: ControlTypes,
+    props?: any,
     position: {
-      x: number
-      y: number
-      z: number
-    }
+      x: number,
+      y: number,
+      z: number,
+    },
     dimension: {
-      width: number | string
-      height: number | string
-    }
+      width: number | string,
+      height: number | string,
+    },
     component?: {
-      uuid?: string
-      name: string
-      props: any
-      layers?: any[]
-    }
-    fixed?: boolean
+      uuid?: string,
+      name: string,
+      props: any,
+      layers?: any[],
+    },
+    fixed?: boolean,
   }): Control {
     let control = new Control()
     Object.assign(control, input)

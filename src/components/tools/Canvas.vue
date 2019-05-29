@@ -5,7 +5,6 @@
       height: canvasSize[1] * zoom + 'px'
     }"
     @click.self="onBoardClick($event)">
-    
     <vue-draggable-resizable
       v-for="(control, i) in controls"
       :key="i"
@@ -18,11 +17,12 @@
       :draggable="!control.fixed"
       :resizable="!control.fixed"
       drag-handle=".titlebar .drag"
+      @dragging="onDragging"
       @dragstop="onDragStop"
       @resizestop="onResizeStop"
       @activated="onActivated(control)"
       :class-name="control.fixed ? 'fixed': 'draggable'"
-      :grid=[10,10]
+      :grid="[10, 10]"
       :parent="true">
         <pa-control
           :title="control.title"
@@ -42,14 +42,13 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
-import Control, { ControlTypes } from '@/core/models/Control'
+import Control from '@/core/models/Control'
 import { Prop, Inspectable } from 'vue-chartlib/support'
-import utils from '@/core/utils'
-import Chart from '@/core/models/Chart'
-import { mocks, PaChart } from 'vue-chartlib'
 import api from '../../api'
-import components from '@/api/components'
 
+/**
+ * 处理屏幕定义/控件拖拽任务
+ */
 @Component({
   components: {
     VueDraggableResizable,
@@ -77,6 +76,11 @@ export default class Canvas extends Vue {
 
   get selectedPlex () {
     return this.plexes.find(c => c.uuid === this.selected)
+  }
+
+  onDragging (x: number, y: number) {
+    console.log('TCL: Canvas -> onDragging -> x: number, y: number', x, y)
+    this.checkDrop(x, y)
   }
 
   onDragStop (x: number, y: number) {
@@ -200,6 +204,10 @@ export default class Canvas extends Vue {
     }
   }
 
+  checkDrop (x: number, y: number) {
+
+  }
+
   onBoardClick ($event: any) {
     // this.selected = ''
   }
@@ -216,6 +224,7 @@ export default class Canvas extends Vue {
     height: number
   }) {
   }
+
   mounted () {
     this.initEvents()
     this.loadControls()
