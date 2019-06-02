@@ -13,8 +13,5 @@ module.exports = {
       }
     ]
   ],
-  sourceType: 'unambiguous',
-  ignore: [
-    '../vue-chartlib/**'
-  ]
+  sourceType: 'unambiguous'
 }

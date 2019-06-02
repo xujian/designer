@@ -228,6 +228,7 @@ export default class Canvas extends Vue {
   mounted () {
     this.initEvents()
     this.loadControls()
+    console.log('Canvas.vue______________________________mounted__', this.$q)
   }
 }
 </script>

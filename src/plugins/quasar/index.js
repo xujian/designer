@@ -1,5 +1,6 @@
 import './styles/quasar.styl'
 import '@quasar/extras/material-icons/material-icons.css'
+import iconSet from 'quasar/icon-set/fontawesome-v5'
 
 import {
   Quasar,
@@ -48,7 +49,8 @@ const install = (Vue, options) => {
     directives: {
     },
     plugins: {
-    }
+    },
+    iconSet: iconSet
   })
 }
 

@@ -8,9 +8,15 @@
 
 <script>
 import { Inspector as PaChartlibInspector } from 'vue-chartlib/support'
+
 export default {
   name: 'PaInspector',
-  props: ['value'],
+  props: {
+    value: {
+      type: Array,
+      default: () => []
+    }
+  },
   computed: {
     mergedProps () {
       return {

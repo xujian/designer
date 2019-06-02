@@ -6,7 +6,7 @@ import './registerServiceWorker'
 import mixins from './mixins'
 import axios from 'axios'
 import 'reflect-metadata'
-import ChartLib from 'vue-chartlib'
+import Chartlib from 'vue-chartlib'
 import './css/app.styl'
 
 const plugins = require.context('./plugins', true, /index.js$/)
@@ -14,7 +14,7 @@ plugins.keys().forEach(p => {
   Vue.use(plugins(p))
 })
 
-Vue.use(ChartLib, {
+Vue.use(Chartlib, {
   theme: 'dark'
 })
 Vue.use(mixins)

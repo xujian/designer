@@ -1,7 +1,7 @@
 module.exports = {
   pluginOptions: {
     quasar: {
-      treeShake: true
+      treeShake: false
     }
   },
   devServer: {
