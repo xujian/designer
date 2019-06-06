@@ -43,7 +43,7 @@ import VueDraggableResizable from 'vue-draggable-resizable'
 import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
 import Control from '@/core/models/Control'
-import { Prop, Inspectable } from 'vue-chartlib/support'
+import { Prop, Inspectable } from 'vue-chartlib/dist/support'
 import api from '../../api'
 
 /**

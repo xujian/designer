@@ -7,13 +7,14 @@
 </template>
 
 <script>
-import { Inspector as PaChartlibInspector } from 'vue-chartlib/support'
+import { Inspector as PaChartlibInspector } from 'vue-chartlib/dist/support'
+import 'vue-chartlib/dist/support.css'
 
 export default {
   name: 'PaInspector',
   props: {
     value: {
-      type: Array,
+      type: Object,
       default: () => []
     }
   },
