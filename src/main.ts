@@ -13,7 +13,7 @@ const plugins = require.context('./plugins', true, /index.js$/)
 plugins.keys().forEach(p => {
   Vue.use(plugins(p))
 })
-
+console.log('DESIGNER________main.ts______________')
 Vue.use(Chartlib, {
   theme: 'dark'
 })

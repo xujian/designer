@@ -41,7 +41,7 @@ export default {
   watch: {
   },
   mounted () {
-    console.log('tools/Inspector.vue____________________', this.value)
+    console.log('tools/Inspector.vue_______________this.$chartlib_____', this.$chartlib)
   },
   components: {
     PaChartlibInspector
