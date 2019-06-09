@@ -6,10 +6,10 @@
       flat
       :label="theme">
       <q-list link>
-        <q-item v-for="(theme, index) in $chartlib.configs.themes"
+        <q-item v-for="(name, index) in $chartlib.configs.themes"
           :key="index"
-          @click.native="itemClick(theme)">
-          <q-item-main>{{theme}}</q-item-main>
+          @click.native="itemClick(name)">
+          <q-item-main>{{ name }}</q-item-main>
         </q-item>
       </q-list>
     </q-btn-dropdown>
@@ -34,7 +34,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-
-</style>

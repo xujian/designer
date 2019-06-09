@@ -45,6 +45,7 @@ import PaControl from '@/components/tools/Control.vue'
 import Control from '@/core/models/Control'
 import { Prop, Inspectable } from 'vue-chartlib/dist/support'
 import api from '../../api'
+import 'vue-chartlib/dist/chartlib.css'
 
 /**
  * 处理屏幕定义/控件拖拽任务
@@ -144,26 +145,12 @@ export default class Canvas extends Vue {
     if (!selected) return
     let component = selected.component
     if (component) {
-      let chartProps = Inspectable.get(component)
-      let layersProps: {
-        name: string,
-        props: Prop<any>[]
-      }[] = []
-      if (component.layers) {
-        component.layers.forEach(l => {
-          layersProps.push({
-            name: l.type,
-            props: Inspectable.get(l)
-          })
-        })
-        this.aside('inspector', {
-          // 打开右侧栏
-          uuid: this.selected,
-          controlProps: selected.props,
-          chartProps,
-          layersProps
-        })
-      }
+      let props = component.inspectable()
+      this.aside('inspector', {
+        // 打开右侧栏
+        uuid: this.selected,
+        ...props
+      })
     }
   }
 
@@ -226,6 +213,15 @@ export default class Canvas extends Vue {
   }
 
   mounted () {
+    this.$chartlib.designtime = true
+    this.$chartlib.bus.on('props', (payload: any) => {
+      console.log('$chartlib.props=============================================on', payload)
+      this.aside('inspector', {
+        // 打开右侧栏
+        uuid: this.uuid,
+        ...payload.data
+      })
+    })
     this.initEvents()
     this.loadControls()
     console.log('Canvas.vue______________________________mounted__', this.$q)

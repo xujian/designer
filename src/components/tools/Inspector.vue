@@ -1,7 +1,7 @@
 <template>
   <div class="control-inspector">
     <pa-chartlib-inspector
-      v-model="mergedProps"
+      v-model="value"
       @change="onChange"></pa-chartlib-inspector>
   </div>
 </template>
@@ -19,13 +19,6 @@ export default {
     }
   },
   computed: {
-    mergedProps () {
-      return {
-        main: [...this.value.chartProps, ...this.value.controlProps],
-        layers: this.value.layersProps,
-        accessories: []
-      }
-    }
   },
   methods: {
     onChange (props) {
@@ -41,7 +34,6 @@ export default {
   watch: {
   },
   mounted () {
-    console.log('tools/Inspector.vue_______________this.$chartlib_____', this.$chartlib)
   },
   components: {
     PaChartlibInspector

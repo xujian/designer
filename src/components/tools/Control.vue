@@ -4,7 +4,7 @@
       <q-btn-group no-shadow>
         <q-btn flat class="button delete" icon="close" />
         <q-btn flat class="button drag" icon="drag_indicator" />
-        <q-btn flat class="button settings" icon="settings" @click="$emit('inspect', uuid)" />
+        <q-btn v-if="false" flat class="button settings" icon="settings" @click="$emit('inspect', uuid)" />
         <q-btn flat class="button menu-button" icon="arrow_right" />
       </q-btn-group>
     </q-toolbar>
