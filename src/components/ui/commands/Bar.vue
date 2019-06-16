@@ -1,24 +1,21 @@
 <template>
   <div class="row">
     <pa-screen-size></pa-screen-size>
-    <pa-chart-palette></pa-chart-palette>
-    <pa-misc-palette></pa-misc-palette>
+    <pa-toolbox></pa-toolbox>
     <pa-themes-bar></pa-themes-bar>
   </div>
 </template>
 
 <script>
 import PaScreenSize from './ScreenSize.vue'
-import PaChartPalette from './ChartPalette.vue'
-import PaMiscPalette from './MiscPalette.vue'
+import PaToolbox from './Toolbox.vue'
 import PaThemesBar from './Themes.vue'
 
 export default {
   nameL: 'PaCommandBar',
   components: {
     PaScreenSize,
-    PaChartPalette,
-    PaMiscPalette,
+    PaToolbox,
     PaThemesBar
   }
 }

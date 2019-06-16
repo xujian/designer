@@ -76,12 +76,6 @@ export default class Control {
           Reflect.set(this, x.name, prop.value)
         }
       })
-      if (this.component) {
-        let component = this.component
-        if (Object.keys(this.component.props).includes(prop.name)) {
-          Reflect.set(component, prop.name, prop.value) // force reactive
-        }
-      }
     })
   }
 

@@ -1,6 +1,6 @@
 import './styles/quasar.styl'
 import '@quasar/extras/material-icons/material-icons.css'
-import iconSet from 'quasar/icon-set/fontawesome-v5'
+import fontawesome from 'quasar/icon-set/fontawesome-v5'
 
 import {
   Quasar,
@@ -21,6 +21,12 @@ import {
   QItem,
   QItemSection,
   QItemLabel,
+  QMenu,
+  QTabs,
+  QTab,
+  QTabPanels,
+  QTabPanel,
+  QSplitter,
   QScrollArea
 } from 'quasar'
 
@@ -44,13 +50,19 @@ const install = (Vue, options) => {
       QItem,
       QItemSection,
       QItemLabel,
+      QMenu,
+      QTabs,
+      QTab,
+      QTabPanels,
+      QTabPanel,
+      QSplitter,
       QScrollArea
     },
     directives: {
     },
     plugins: {
     },
-    iconSet: iconSet
+    iconSet: fontawesome
   })
 }
 

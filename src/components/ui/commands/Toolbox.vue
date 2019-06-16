@@ -1,32 +1,49 @@
 <template>
-  <div class="chart-palette palette row">
-    <q-btn-dropdown :icon="category.icon" split
+  <div class="toolbox row">
+    <q-btn :icon="category.icon"
       v-for="(category, i1) in categories" :key="i1">
-      <q-list link class="palette-popover row gutter-none">
-        <q-item class="posit col-3"
-          v-for="(def, i2) in category.presets" :key="i2">
-          <div class="pick">
-            <div class="image flex justify-center">
-              <q-icon :name="def.icon"></q-icon>
-            </div>
-            <h6>{{def.title}}</h6>
-          </div>
-        </q-item>
-      </q-list>
-    </q-btn-dropdown>
+      <q-menu dark class="toolbox-menu">
+        <q-splitter :value="10" class="toolbox-splitter">
+          <template v-slot:before>
+            <q-tabs :value="'sub1'" class="text-white" vertical>
+              <q-tab name="sub1" icon="mail"></q-tab>
+              <q-tab name="sub2" icon="mail"></q-tab>
+              <q-tab name="sub3" icon="mail"></q-tab>
+            </q-tabs>
+          </template>
+          <template v-slot:after class="toolbox-main">
+            <q-tab-panels :value="'sub1'" dark>
+              <q-tab-panel name="sub1">
+                <q-list link class="icon-list row gutter-none">
+                  <q-item class="posit col-3 text-white"
+                    v-for="(def, i2) in category.presets" :key="i2">
+                    <div class="pick">
+                      <div class="image flex justify-center">
+                        <q-icon :name="def.icon"></q-icon>
+                      </div>
+                      <h6>{{ def.title }}</h6>
+                    </div>
+                  </q-item>
+                </q-list>
+              </q-tab-panel>
+            </q-tab-panels>
+          </template>
+        </q-splitter>
+      </q-menu>
+    </q-btn>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'PaChartPalette',
+  name: 'PaToolbox',
   data () {
     return {
       categories: [
         {
-          tilte: '柱图',
-          icon: 'icon-chart-bar',
+          tilte: '图表',
+          icon: 'insert_chart_outlined',
           presets: [
             {
               title: '横向柱状图',
@@ -47,8 +64,8 @@ export default {
           ]
         },
         {
-          tilte: '线图',
-          icon: 'icon-chart-line',
+          tilte: '文字',
+          icon: 'insert_chart_outlined',
           presets: [
             {
               title: '横向柱状图',
@@ -69,8 +86,8 @@ export default {
           ]
         },
         {
-          tilte: '饼图',
-          icon: 'icon-chart-pie',
+          tilte: '图片',
+          icon: 'insert_chart_outlined',
           presets: [
             {
               title: '横向柱状图',
@@ -99,14 +116,16 @@ export default {
 </script>
 
 <style lang="stylus">
-.chart-palette
+.toolbox
   background-color #002b24
   height 48px
   margin-right -4px
   .q-btn-dropdown-split .q-btn-dropdown-arrow
     border-right 1px solid rgba(255,255,255,0.3)
     width 20px
-.chart-palette, .palette-popover
+  .q-splitter
+    height 250px
+.toolbox, .toolbox-menu
   .q-btn
     padding 0
     width 40px
@@ -114,10 +133,12 @@ export default {
     font-size: 24px;
     width: 24px;
     height: 24px;
-.palette-popover
+.toolbox-menu
   color #fff
   width 400px
   padding 0 !important
+  .q-splitter
+    height 250px
   .posit
     padding 0
     text-align center
@@ -139,4 +160,12 @@ export default {
   .q-btn-dropdown-arrow
     width 24px
     background-color rgba(255,255,255,0.2)
+.toolbox-splitter
+  background-color #222
+  width  600px
+  height 200px
+  .q-tab-panels
+    background transparent
+  .q-tab-panel
+    padding 0
 </style>
