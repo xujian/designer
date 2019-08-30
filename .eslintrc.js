@@ -40,7 +40,7 @@ module.exports = {
       overrides: {
         interface: {
           multiline: {
-            delimiter: 'semi',
+            delimiter: 'comma',
             requireLast: true
           }
         }
@@ -56,6 +56,6 @@ module.exports = {
     'vue/attributes-order': 0,
     'space-infix-ops': 1,
     'no-multi-spaces': 1,
-    'no-trailing-spaces': 1
+    'no-trailing-spaces': 1,
   }
 }

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "local-server": "node ./local-server/file-chart-capture.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
@@ -18,7 +19,8 @@
     "vue-draggable-resizable": "^2.0.0-rc1",
     "vue-property-decorator": "^7.3.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.2"
   },
   "devDependencies": {
     "@types/chai": "^4.1.0",

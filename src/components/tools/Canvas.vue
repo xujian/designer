@@ -44,6 +44,7 @@ import '@/css/vue-draggable-resizable.css'
 import PaControl from '@/components/tools/Control.vue'
 import Control from '@/core/models/Control'
 import { Prop, Inspectable } from 'vue-chartlib/dist/support'
+import { Getter, Action } from 'vuex-class'
 import api from '../../api'
 import 'vue-chartlib/dist/chartlib.css'
 
@@ -62,7 +63,7 @@ export default class Canvas extends Vue {
    */
   selected: string = ''
   canvasSize: number[] = [1920, 540]
-  zoom: number = 1
+  @Getter('zoom') zoom: number = 1
   plexes: any[] = []
   components: any[] = []
   controls: Control[] = []
